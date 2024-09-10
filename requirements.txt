@@ -1,0 +1,10 @@
+python-dotenv
+Flask
+WTForms
+Flask-WTF
+pymongo
+email-validator
+scikit-learn
+python-docx
+PyPDF2
+spacy

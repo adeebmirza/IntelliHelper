@@ -1,0 +1,154 @@
+/* CSS Design for the IntellHelper */
+
+/* Resetting the default styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+    font-family: "Abel", sans-serif;
+    background-color: #eef7ff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+html{
+    background-image: url('../images/Background_Design.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+body {
+    margin: 0;
+    background-color: #a4c5d100;
+    
+}
+
+.container {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: stretch;
+    background-color: #c6dbe7;
+    padding: 69px;
+    border-radius: 10px;
+    box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.1);
+    width: 80%;
+    max-width: 100%;
+    border-color: none;
+}
+
+/* Styling the login section and signup section */
+.login-section, .signup-section {
+    background-color: #eef7ff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.login-section{
+    border-radius: 10px 0 0 10px;
+    width: 60%;
+}
+
+.signup-section{
+    border-radius: 0 10px 10px 0;
+    width: 30%;
+}
+
+/* Styling headers */
+h2 {
+    font-size: 28px;
+    color: #1e1d1d;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+/* Input fields styling */
+.input-group {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    font-size: 16px;
+    color: #333;
+    margin-bottom: 5px;
+}
+
+input[type="text"], input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    background-color: white;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 10px;
+}
+
+/* Forgot password link styling */
+.forgot-password {
+    font-size: 14px;
+    text-align: right;
+    color: #333;
+}
+
+.forgot-password a {
+    color: #337ab7;
+    text-decoration: none;
+}
+
+.forgot-password a:hover span {
+    text-decoration: underline;
+}
+
+/* Button styling */
+.login-btn input[type="submit"], .join-now-btn {
+    display: block;
+    font-size: 18px;
+    color: #337ab7;
+    text-align: center;
+    text-decoration: none;
+    padding: 10px;
+    border: 2px solid #337ab7;
+    border-radius: 5px;
+    transition: background-color 0.3s, color 0.3s;
+    width: 100%;
+    cursor: pointer;
+    margin-top: 20px;
+    background-color: inherit;
+}
+
+.login-btn input[type="submit"]:hover, .join-now-btn:hover {
+    background-color: #337ab7;
+    color: white;
+}
+
+/* Styling the signup section */
+.signup-section p {
+    margin-bottom: 20px;
+    font-size: 18px;
+    color: #333;
+    text-align: center;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+        width: 100%;
+        padding: 20px;
+    }
+
+    .login-section, .signup-section {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+}

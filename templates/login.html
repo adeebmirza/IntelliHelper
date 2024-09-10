@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Importing the CSS file -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
+
+    <!-- Importing Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Abel&display=swap" rel="stylesheet">
+    <title>Login - IntellHelper</title>
+</head>
+
+<body>
+    <div class="container">
+        <div class="login-section">
+            <h2>Login</h2>
+            <form method="POST">
+                {{ form.hidden_tag() }}
+                <div class="input-group">
+                    {{ form.username.label }} 
+                    {{ form.username() }}
+                </div>
+                <div class="input-group">
+                    {{ form.password.label }} 
+                    {{ form.password() }}
+                </div>
+                <div class="login-btn">
+                    <input type="submit" value="Login">
+                </div>
+                <div class="forgot-password">
+                    Forgot Password?  <a href="#"><span>Click Here</span></a>
+                </div>
+            </form>
+        </div>
+
+        <div class="signup-section">
+            <h2>Not a Member yet? Join IntellHelper Today!</h2>
+            <p>Ready to be part of something smarter? Click below and get started!</p>
+            <a href="{{ url_for('signup') }}" class="join-now-btn">Join Now</a>
+        </div>
+    </div>
+</body>
+
+</html>

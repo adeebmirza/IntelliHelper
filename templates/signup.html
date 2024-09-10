@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/signup.css') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Abel&display=swap" rel="stylesheet">
+    <title>Signup - IntelliHelper</title>
+</head>
+<body>
+    <div class="container">
+        <div class="login-section">
+            <h2>Already a member?</h2>
+            <p>You've got the smarts! <br><a href="{{ url_for('login') }}">Log in here</a> to access your account and continue your journey.</p>
+        </div>
+        <div class="signup-section">
+            <h2>Sign Up</h2>
+            <form method="POST">
+                {{ form.hidden_tag() }}
+
+                <div class="input-group">
+                    {{ form.name.label }}
+                    {{ form.name() }}
+                </div>
+
+                <div class="input-group">
+                    {{ form.username.label }}
+                    {{ form.username() }}
+                </div>
+
+                <div class="input-group">
+                    {{ form.email.label }}
+                    {{ form.email() }}
+                </div>
+
+                <div class="input-group">
+                    {{ form.password.label }}
+                    {{ form.password() }}
+                </div>
+
+                <div class="input-group">
+                    {{ form.confirm_password.label }}
+                    {{ form.confirm_password() }}
+                </div>
+
+                <div class="signup-btn">
+                    {{ form.submit() }}
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

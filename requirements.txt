@@ -8,3 +8,9 @@ scikit-learn
 python-docx
 PyPDF2
 spacy
+Flask-Session
+Werkzeug
+passlib
+argon2-cffi
+Flask-Mail
+pyotp

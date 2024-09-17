@@ -33,7 +33,7 @@
                     <input type="submit" value="Login">
                 </div>
                 <div class="forgot-password">
-                    Forgot Password?  <a href="#"><span>Click Here</span></a>
+                    Forgot Password?  <a href="{{ url_for('profile.forgot_password') }}"><span>Click Here</span></a>
                 </div>
             </form>
         </div>
@@ -41,7 +41,7 @@
         <div class="signup-section">
             <h2>Not a Member yet? Join IntellHelper Today!</h2>
             <p>Ready to be part of something smarter? Click below and get started!</p>
-            <a href="{{ url_for('signup') }}" class="join-now-btn">Join Now</a>
+            <a href="{{ url_for('auth.signup') }}" class="join-now-btn">Join Now</a>
         </div>
     </div>
 </body>

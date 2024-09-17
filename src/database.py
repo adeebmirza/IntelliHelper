@@ -4,6 +4,7 @@ import sys
 import os
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../..')))
 from src.exception import CustomException
+from bson import ObjectId
 from src.logger import logger
 load_dotenv()
 
@@ -28,3 +29,7 @@ def find_user(login_input):
         return users_collection.find_one({"$or": [{"username": login_input}, {"email": login_input}]})
     except Exception as e:
         raise CustomException(e,sys)
+    
+def get_user_by_id(user_id):
+    """Retrieve user by their ObjectId."""
+    return users_collection.find_one({'_id': ObjectId(user_id)})

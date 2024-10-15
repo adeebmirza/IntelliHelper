@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>To-Do List</title>
+</head>
+<body>
+    <h1>To-Do List</h1>
+    <a href="{{ url_for('todo_app.add_task') }}">Add New Task</a> <!-- Prefix with 'todo_app' -->
+    <ul>
+        {% for task in tasks %}
+        <li>
+            {{ task['task'] }} - {{ task['status'] }}
+            <a href="{{ url_for('todo_app.edit_task', task_id=task['_id']) }}">Edit</a> <!-- Prefix with 'todo_app' -->
+            <a href="{{ url_for('todo_app.complete_task', task_id=task['_id']) }}">Complete</a> <!-- Prefix with 'todo_app' -->
+            <a href="{{ url_for('todo_app.delete_task', task_id=task['_id']) }}">Delete</a> <!-- Prefix with 'todo_app' -->
+        </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

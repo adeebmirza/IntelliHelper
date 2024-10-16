@@ -1,20 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>To-Do List</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
-<body>
-    <h1>To-Do List</h1>
-    <a href="{{ url_for('todo_app.add_task') }}">Add New Task</a> <!-- Prefix with 'todo_app' -->
-    <ul>
-        {% for task in tasks %}
-        <li>
-            {{ task['task'] }} - {{ task['status'] }}
-            <a href="{{ url_for('todo_app.edit_task', task_id=task['_id']) }}">Edit</a> <!-- Prefix with 'todo_app' -->
-            <a href="{{ url_for('todo_app.complete_task', task_id=task['_id']) }}">Complete</a> <!-- Prefix with 'todo_app' -->
-            <a href="{{ url_for('todo_app.delete_task', task_id=task['_id']) }}">Delete</a> <!-- Prefix with 'todo_app' -->
-        </li>
-        {% endfor %}
-    </ul>
+
+<body class="bg-light">
+    <div class="container mt-5">
+        <h1 class="text-center mb-4">My To-Do List</h1>
+        
+        <div class="d-flex justify-content-between mb-3">
+            <h2>Tasks</h2>
+            <a href="{{ url_for('todo_app.add_task') }}" class="btn btn-primary">Add New Task</a>
+        </div>
+
+        <ul class="list-group">
+            {% for task in tasks %}
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                <span>
+                    <strong>{{ task['task'] }}</strong> - <span class="text-muted">{{ task['status'] }}</span>
+                </span>
+                <div>
+                    <a href="{{ url_for('todo_app.edit_task', task_id=task['_id']) }}" class="btn btn-warning btn-sm">Edit</a>
+                    <a href="{{ url_for('todo_app.complete_task', task_id=task['_id']) }}" class="btn btn-success btn-sm">Complete</a>
+                    <a href="{{ url_for('todo_app.delete_task', task_id=task['_id']) }}" class="btn btn-danger btn-sm">Delete</a>
+                </div>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
+
 </html>

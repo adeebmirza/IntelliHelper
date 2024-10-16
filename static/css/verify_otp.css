@@ -1,0 +1,93 @@
+/* General styling */
+body {
+    font-family: 'Abel', sans-serif;
+    background-color: #e0f7f9;
+    background-image: url('../images/BackGround_img_frg_pswd.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    color: #333;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* Main container with blur effect and responsive padding */
+.main-container {
+    background-color: rgba(122, 178, 178, 0.6); 
+    padding: 5%;
+    border-radius: 7px;
+    width: 80%;
+    max-width: 400px;
+}
+
+/* Internal container setup for form alignment */
+.internal-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Credentials block styling */
+.credentials {
+    text-align: center;
+    width: 100%;
+}
+
+.text-center{
+    font-size: 2em;
+}
+
+/* OTP input field styling */
+.otp-container {
+    margin-bottom: 15px;
+    font-size: 1.5em;
+}
+
+.otp-container input[type="text"] {
+    width: 75%;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+/* Button container */
+button[type="submit"] {
+    font-size: 18px;
+    color: #337ab7;
+    text-align: center;
+    text-decoration: none;
+    padding: 10px;
+    border: 2px solid #337ab7;
+    border-radius: 5px;
+    transition: background-color 0.3s, color 0.3s;
+    width: 75%;
+    cursor: pointer;
+    margin-top: 25px;
+    background-color: inherit;
+}
+
+button[type="submit"]:hover {
+    background-color: #337ab7;
+    color: white;
+}
+
+
+/* Flash message styling */
+.alert {
+    margin-top: 20px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+    .main-container {
+        width: 95%;
+        padding: 10%;
+    }
+}

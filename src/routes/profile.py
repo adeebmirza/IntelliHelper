@@ -12,7 +12,7 @@ argon2 = PasswordHasher()
 @profile_bp.route('/profile')
 def profile():
     if 'user' not in session:
-        return redirect(url_for('login'))
+        return redirect(url_for('auth.login'))
     
     user_id = session['user']['_id']
     user_data = get_user_by_id(user_id)

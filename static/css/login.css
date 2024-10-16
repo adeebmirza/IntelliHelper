@@ -32,7 +32,8 @@ body {
     display: flex;
     justify-content: space-evenly;
     align-items: stretch;
-    background-color: #c6dbe7;
+    background-color: rgba(255, 255, 255, 0.1); /* Semi-transparent */
+    backdrop-filter: blur(15px); 
     padding: 69px;
     border-radius: 10px;
     box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.1);
@@ -137,6 +138,30 @@ input[type="text"], input[type="password"] {
     font-size: 18px;
     color: #333;
     text-align: center;
+}
+
+.password-container {
+    position: relative;
+    width: 100%;
+}
+
+.password-container input[type="password"],
+.password-container input[type="text"] {
+    width: 100%;
+    padding-right: 40px;
+}
+
+.eye-icon {
+    position: absolute;
+    right: 10px;
+    top: 65%;
+    transform: translateY(-50%);
+    cursor: pointer;
+}
+
+.eye-icon svg {
+    width: 24px;
+    height: 24px;
 }
 
 /* Responsive adjustments */

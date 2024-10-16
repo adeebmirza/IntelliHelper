@@ -68,6 +68,8 @@ def verify_otp(email):
 @auth_bp.route('/login', methods=['GET', 'POST'])
 def login():
     form = LoginForm()
+    if user := session.get('user'):
+        return redirect(url_for('profile.profile'))
     if form.validate_on_submit():
         login_input = form.username.data or form.email.data
         password = form.password.data

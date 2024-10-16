@@ -1,4 +1,77 @@
-<h1>Profile</h1>
-<p>Name: {{ name }}</p>
-<p>Email: {{ email }}</p>
-<p><a href="{{ url_for('auth.logout') }}">Logout</a></p>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* New background color */
+        body {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #1f3b65; /* Light gray */
+        }
+
+        .profile-card {
+            width: 100%;
+            max-width: 600px;
+            padding: 40px;
+            border-radius: 15px;
+            background-color: white;
+            box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .profile-card h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .profile-card p {
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+        }
+
+        .profile-card .profile-icon {
+            font-size: 5rem;
+            color: #2980b9;
+            margin-bottom: 20px;
+        }
+
+        .btn-logout {
+            background-color: #e74c3c;
+            color: white;
+            padding: 10px 30px;
+            font-size: 1.2rem;
+            border-radius: 30px;
+        }
+
+        .btn-logout:hover {
+            background-color: #c0392b;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="profile-card text-center">
+        <div class="profile-icon">
+            <i class="bi bi-person-circle"></i> <!-- Bootstrap icon -->
+        </div>
+        <h1>Profile</h1>
+        <p><strong>Name:</strong> {{ name }}</p>
+        <p><strong>Email:</strong> {{ email }}</p>
+        <a href="{{ url_for('auth.logout') }}" class="btn btn-logout mt-4">Logout</a>
+    </div>
+
+    <!-- Bootstrap Icons & JS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

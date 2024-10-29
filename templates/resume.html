@@ -7,6 +7,7 @@
     <!-- Fav_Icon -->
     <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/Intelli_Logo.png') }}">
     <!-- CSS Import -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/resume.css') }}">
      <!-- Fonts Import -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -14,24 +15,60 @@
     <title>Resume Checker</title>
 </head>
 <body>
-    <h1>Resume Checker</h1>
-    
+    <!-- Navigation Bar -->
+    <nav>
+        <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">About Us</a></li>
+            <li><a href="#">Tabs</a></li>
+        </ul>
+    </nav>
+
+    <!-- Content Wrapper -->
+    <div class="content-wrapper">
+        <h1>Is Your Resume Good Enough??</h1>
+        <p>Find out then...</p>
+        <p>A free and fast AI resume checker doing 16 crucial checks to ensure your resume is ready to perform and get you interview callbacks.</p>
+    </div>
+
+    <!-- Form Section -->
     <form method="POST" enctype="multipart/form-data">
-        <div>
-            <label for="resume">Upload Resume:</label>
-            <input type="file" name="resume" id="resume" required>
+        <h1>Enter Your Resume And Career</h1>
+        <div class="file-upload-container">
+            <label for="resume" class="file-upload-label">Upload Resume:</label>
+            <input type="file" name="resume" id="resume" class="file-upload" required>
+            <label for="resume" class="file-upload-button">Choose File</label>
+            <span id="file-chosen">No file chosen</span>
         </div>
         
+        <label for="job_description">Job Description:</label>
         <div>
-            <label for="job_description">Job Description:</label>
             <textarea name="job_description" id="job_description" rows="5" required></textarea>
         </div>
         
         <button type="submit">Check Resume Score</button>
+        {% if score is not none %}
+            <h2>ATS Score: {{ score }}%</h2>
+        {% endif %}
     </form>
-    
-    {% if score is not none %}
-        <h2>ATS Score: {{ score }}%</h2>
-    {% endif %}
+
+    <!-- Score Circle -->
+    <div class="score-container">
+        <p>Score:</p>
+        <span id="score-value">0</span>
+    </div>
+
+    <script>
+        const realFileBtn = document.getElementById('resume');
+        const fileChosen = document.getElementById('file-chosen');
+
+        realFileBtn.addEventListener('change', function() {
+            if (realFileBtn.files.length > 0) {
+                fileChosen.textContent = realFileBtn.files[0].name;
+            } else {
+                fileChosen.textContent = "No file chosen";
+            }
+        });
+    </script>
 </body>
 </html>

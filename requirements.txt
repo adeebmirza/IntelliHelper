@@ -14,3 +14,17 @@ passlib
 argon2-cffi
 Flask-Mail
 pyotp
+torch
+transformers
+pytorch_lightning
+sentencepiece
+tokenizers
+huggingface-hub
+jsonify
+langchain-pinecone
+langchain
+langchain-google-genai
+langchain-community
+sentence-transformers
+pinecone-client
+pinecone[grpc]

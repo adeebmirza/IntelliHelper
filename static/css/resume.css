@@ -1,0 +1,214 @@
+/* Basic reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Abel', sans-serif;
+    background-color: #f4f7f6;
+    background-image: url('../images/Resume_Score_BGimg.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    min-height: 100vh;
+    position: relative;
+}
+
+/* Navigation Bar */
+nav ul {
+    display: flex;
+    justify-content: center;
+    list-style: none;
+    padding: 10px;
+    background-color: #d0e9ef;
+    margin-bottom: 20px;
+}
+
+nav ul li {
+    margin: 0 15px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #337ab7;
+    font-size: 1.1rem;
+    padding: 10px 15px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+nav ul li a:hover {
+    background-color: #337ab7;
+    color: #fff;
+}
+
+/* Content Wrapper */
+.content-wrapper {
+    text-align: left;
+    max-width: 500px;
+    padding: 20px;
+    color: #333;
+}
+
+.content-wrapper h1 {
+    font-size: 2rem;
+    margin-bottom: 10px;
+    color: #2c3e50;
+}
+
+.content-wrapper p {
+    font-size: 1.1rem;
+    margin-bottom: 10px;
+}
+
+/* Main Form Container */
+form {
+    background-color: #fff;
+    backdrop-filter: blur(10px);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 500px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+h1 {
+    font-size: 1.5rem;
+    text-align: center;
+    margin-bottom: 20px;
+    color: #2c3e50;
+}
+
+label {
+    font-size: 1.1rem;
+    color: #34495e;
+}
+
+/* Custom file upload container */
+.file-upload-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 5px;
+}
+
+/* Hidden file input */
+.file-upload {
+    display: none;
+}
+
+/* Custom file upload button */
+.file-upload-button {
+    color: #337ab7;
+    text-align: center;
+    font-size: 1.1em;
+    text-decoration: none;
+    padding: 10px;
+    border: 2px solid #337ab7;
+    border-radius: 5px;
+    transition: background-color 0.3s, color 0.3s;
+    width: 100%;
+    cursor: pointer;
+    background-color: inherit;
+}
+
+.file-upload-button:hover {
+    background-color: #337ab7;
+    color: white;
+}
+
+/* Text to display the chosen file */
+#file-chosen {
+    font-size: 0.9rem;
+    color: #555;
+}
+
+/* Textarea styling */
+textarea {
+    width: 100%;
+    padding: 10px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #fafafa;
+    transition: border 0.3s ease;
+    max-width: 100%;
+}
+
+textarea:hover {
+    border-color: #7f8c8d;
+}
+
+/* General button styles */
+button, input[type="file"] {
+    color: #337ab7;
+    text-align: center;
+    font-size: 1.1em;
+    text-decoration: none;
+    padding: 10px;
+    border: 2px solid #337ab7;
+    border-radius: 5px;
+    transition: background-color 0.3s, color 0.3s;
+    width: 100%;
+    cursor: pointer;
+    margin-top: 20px;
+    background-color: inherit;
+}
+
+button:hover {
+    background-color: #337ab7;
+    color: white;
+}
+
+/* Score result styling */
+.score-container {
+    position: absolute;
+    bottom: 50px;
+    right: 50px;
+    background-color: #337ab7;
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 1.2rem;
+}
+
+#score-value {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+/* Mobile responsive */
+@media (max-width: 600px) {
+    form {
+        padding: 15px;
+    }
+
+    h1 {
+        font-size: 1.8rem;
+    }
+
+    button {
+        font-size: 1rem;
+    }
+
+    .score-container {
+        bottom: 30px;
+        right: 30px;
+        width: 80px;
+        height: 80px;
+    }
+}

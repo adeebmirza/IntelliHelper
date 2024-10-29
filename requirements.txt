@@ -28,3 +28,4 @@ langchain-community
 sentence-transformers
 pinecone-client
 pinecone[grpc]
+boto3

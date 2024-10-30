@@ -2,6 +2,8 @@ from pymongo import MongoClient
 from dotenv import load_dotenv
 import sys
 import os
+import datetime
+from src.routes import todo
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../..')))
 from src.exception import CustomException
 from bson import ObjectId
@@ -20,14 +22,19 @@ except Exception as e:
 def create_user(user_data):
     logger.info("Creating user")
     try:
+        # Convert date fields to strings if necessary
+        if isinstance(user_data.get("dob"), datetime.date):
+            user_data["dob"] = user_data["dob"].isoformat()  # e.g., '2005-07-02'
+        
         users_collection.insert_one(user_data)
     except Exception as e:
-        raise CustomException(e,sys)
+        raise CustomException(e, sys)
 
 def find_user(login_input):
     logger.info("Finding user")
     try:
-        return users_collection.find_one({"$or": [{"username": login_input}, {"email": login_input}]})
+        user =  users_collection.find_one({"$or": [{"username": login_input}, {"email": login_input}]})
+        return user
     except Exception as e:
         raise CustomException(e,sys)
     

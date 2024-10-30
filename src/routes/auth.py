@@ -36,6 +36,8 @@ def signup():
                     'name': form.name.data,
                     'username': form.username.data,
                     'email': form.email.data,
+                    'gender' : form.gender.data,
+                    'dob' : form.dob.data,
                     'password': argon2.hash(form.password.data)
                 }
             }
@@ -75,14 +77,21 @@ def login():
         password = form.password.data
 
         user = find_user(login_input)
+        
+        if not user:
+            flash('Username or email not found', 'error')
+            return render_template('login.html', form=form)
+        
         try:
-            if user and argon2.verify(user['password'], password):
+            if argon2.verify(user['password'], password):
                 user['_id'] = str(user['_id'])  # Convert ObjectId to string for session storage
                 session['user'] = user
                 return redirect(url_for('auth.Home'))
+            else:
+                flash('Invalid password', 'error')
         except VerifyMismatchError:
-            flash('Invalid username or password', 'error')
-    
+            flash('Invalid password', 'error')
+
     return render_template('login.html', form=form)
 
 

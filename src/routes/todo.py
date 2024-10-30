@@ -1,12 +1,13 @@
 from flask import Blueprint, render_template, request, redirect, url_for, session
 from bson.objectid import ObjectId
-from src.database import todos_collection
+#from src.database import todos_collection
 
 todo = Blueprint('todo_app', __name__)
 
 # Home route - Displays all tasks
 @todo.route('/todo_app', methods=['GET', 'POST'])
 def index():
+    from src.database import todos_collection
     user_id = session.get('user', {}).get('_id')  # Safer way to access session data
     if not user_id:
         return redirect(url_for('auth.login'))
@@ -17,6 +18,7 @@ def index():
 # Add task route
 @todo.route('/add_task', methods=['GET', 'POST'])
 def add_task():
+    from src.database import todos_collection
     user_id = session.get('user', {}).get('_id')
     if not user_id:
         return redirect(url_for('auth.login'))
@@ -30,6 +32,7 @@ def add_task():
 # Edit task route
 @todo.route('/edit_task/<task_id>', methods=['GET', 'POST'])
 def edit_task(task_id):
+    from src.database import todos_collection
     user_id = session.get('user', {}).get('_id')
     if not user_id:
         return redirect(url_for('auth.login'))
@@ -44,6 +47,7 @@ def edit_task(task_id):
 # Delete task route
 @todo.route('/delete_task/<task_id>')
 def delete_task(task_id):
+    from src.database import todos_collection
     user_id = session.get('user', {}).get('_id')
     if not user_id:
         return redirect(url_for('auth.login'))
@@ -54,6 +58,7 @@ def delete_task(task_id):
 # Mark task as completed
 @todo.route('/complete_task/<task_id>')
 def complete_task(task_id):
+    from src.database import todos_collection
     user_id = session.get('user', {}).get('_id')
     if not user_id:
         return redirect(url_for('auth.login'))

@@ -21,9 +21,9 @@ def profile():
         return "User not found", 404
     
     # Convert ObjectId to string for safety
-    user_data['_id'] = str(user_data['_id'])
+    display_data = {k: v for k, v in user_data.items() if k not in ['_id', 'password']}
     
-    return render_template('profile.html', name=user_data['name'], email=user_data['email'])
+    return render_template('profile.html', display_data=display_data)
 
 
 @profile_bp.route('/forgot_password', methods=['GET', 'POST'])

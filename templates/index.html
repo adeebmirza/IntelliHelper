@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <!-- Meta for Responsive Design -->
     <meta charset="UTF-8">
@@ -7,13 +8,121 @@
     <!-- Fav_Icon -->
     <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/Intelli_Logo.png') }}">
     <!-- CSS Import -->
-     <!-- Fonts Import -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
+    <!-- Fonts Import -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Abel&display=swap" rel="stylesheet">
     <title>IntelliHelper</title>
 </head>
+
 <body>
-    Helllo Qeold
+    <div>
+        <div class="wave"></div>
+        <div class="wave"></div>
+        <div class="wave"></div>
+    </div>
+    <div class="navBar">
+        <div class="logo">
+            IntelliHelper
+        </div>
+        <div class="nav_links">
+            <ul>
+                
+                <li>
+                    <button onclick="toggleMenu()">Tabs</button>
+                    <div class="dropdown-menu" style="display: none;">
+                        <ul>
+                            <li><a href="#">Health Bot</a></li>
+                            <li><a href="{{ url_for('ats.index') }}">Resume Checker</a></li>
+                            <li><a href="{{ url_for('todo_app.index') }}">To-Do List</a></li>
+                            <li><a href="#">White Board</a></li>
+                            <li><a href="#">News Summary</a></li>
+                        </ul>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+        <div class="joining">
+            {% if session.get('user_logged_in') %}
+            <!-- Profile Circle -->
+            <div class="profile-circle">
+                <a href="{{ url_for('profile.profile') }}">Profile</a>
+            </div>
+            {% else %}
+            <!-- Login and Signup Buttons -->
+            <div class="l_btn"><a href="{{ url_for('auth.login') }}">Login</a></div>
+            <div class="s_btn"><a href="{{ url_for('auth.signup') }}">SignUp</a></div>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="separator"></div>
+
+    <div class="jumbotron">
+        <div class="j_data">
+            JOIN..IMPORVE..<span id="j_data_highlight">LEARN.</span><br><br>
+            Welcome To IntelliHelper!!<br>Get your Solutions<br>Right Now
+        </div>
+    </div>
+
+    <div class="health_bot">
+        <input onclick="togglebot()" type="text" placeholder="Enter your Symptoms or Health Concerns...">
+    </div>
+
+    <div class="health_bot_tab">
+        <button onclick="togglebot()" class="close-btn">Close</button>
+        <div class="hbt_text">
+            <input type="text" placeholder="Enter your Symptoms or Health Concerns...">
+        </div>
+        <div class="chat_area">
+            
+        </div>
+    </div>
+
+
+    </div>
+
+    <div class="bottom_links">
+        <ul>
+            <li><a href="{{ url_for('ats.index') }}" title="Resume Checker">📄</a></li>
+            <li><a href="{{ url_for('medical.index') }}" title="Health Bot">🩺</a></li>
+            <li><a href="{{ url_for('todo_app.index') }}" title="To-Do List">📝</a></li>
+            <li><a href="#" title="Whiteboard">🖌️</a></li>
+            <li><a href="{{ url_for('text.index') }}" title="News Summary">📰</a></li>
+
+        </ul>
+    </div>
+
+
+    <script>
+        function toggleMenu() {
+            const dropdownMenu = document.querySelector('.dropdown-menu');
+            // Toggle display of the dropdown menu
+            if (dropdownMenu.style.display === 'none' || dropdownMenu.style.display === '') {
+                dropdownMenu.style.display = 'block';
+            } else {
+                dropdownMenu.style.display = 'none';
+            }
+        }
+
+        document.addEventListener('click', function (event) {
+            const dropdownMenu = document.querySelector('.dropdown-menu');
+            const toggleButton = document.querySelector('button[onclick="toggleMenu()"]');
+
+            // Check if the click is outside the dropdown and the button
+            if (!dropdownMenu.contains(event.target) && !toggleButton.contains(event.target)) {
+                dropdownMenu.style.display = 'none';
+            }
+        });
+
+        function togglebot() {
+            const botTab = document.querySelector('.health_bot_tab');
+            botTab.classList.toggle('active');
+        }
+
+    </script>
 </body>
+
 </html>

@@ -8,13 +8,12 @@
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
-        /* New background color */
         body {
             height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            background-color: #1f3b65; /* Light gray */
+            background-color: #1f3b65;
         }
 
         .profile-card {
@@ -61,13 +60,15 @@
 
     <div class="profile-card text-center">
         <div class="profile-icon">
-            <i class="bi bi-person-circle"></i> <!-- Bootstrap icon -->
+            <i class="bi bi-person-circle"></i>
         </div>
         <h1>Profile</h1>
-        <p><strong>Name:</strong> {{ name }}</p>
-        <p><strong>Email:</strong> {{ email }}</p>
+        {% for key, value in display_data.items() %}
+            <p><strong>{{ key | capitalize }}:</strong> {{ value }}</p>
+        {% endfor %}
         <a href="{{ url_for('auth.logout') }}" class="btn btn-logout mt-4">Logout</a>
     </div>
+    
 
     <!-- Bootstrap Icons & JS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">

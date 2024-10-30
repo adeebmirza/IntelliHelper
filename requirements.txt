@@ -29,3 +29,4 @@ sentence-transformers
 pinecone-client
 pinecone[grpc]
 boto3
+langchain-huggingface

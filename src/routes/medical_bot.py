@@ -1,12 +1,12 @@
 from flask import Blueprint, render_template, request
 from src.Chatbot.helper import download_hugging_face_embeddings
-from langchain.vectorstores import Pinecone
 from langchain_pinecone import PineconeVectorStore
 from langchain.prompts import PromptTemplate
 from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain.chains import RetrievalQA
 from dotenv import load_dotenv
 from src.Chatbot.prompt import *
+from langchain_community.vectorstores import Pinecone
 
 bot_bp = Blueprint('medical', __name__)
 
@@ -47,5 +47,5 @@ def index():
 def chat():
     msg = request.form["msg"]
     input = msg
-    result = qa({"query": input})
+    result = qa.invoke({"query": input})
     return str(result["result"])

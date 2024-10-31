@@ -2,12 +2,15 @@ from pymongo import MongoClient
 from dotenv import load_dotenv
 import sys
 import os
+from argon2 import PasswordHasher
 import datetime
 from src.routes import todo
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../..')))
 from src.exception import CustomException
 from bson import ObjectId
 from src.logger import logger
+
+argon2 = PasswordHasher()
 load_dotenv()
 
 try:
@@ -42,7 +45,15 @@ def get_user_by_id(user_id):
     """Retrieve user by their ObjectId."""
     return users_collection.find_one({'_id': ObjectId(user_id)})
 
+def update_user_info(user_id, data):
+    users_collection.update_one({'_id': ObjectId(user_id)}, {'$set': data})
 
+def handle_password_update(password):
+    if password:
+        return {'password': argon2.hash(password)}
+    return {}
+
+#todo
 def create_todo(todo_data):
     logger.info("Creating todo")
     try:
@@ -56,3 +67,5 @@ def get_todos(user_id):
         return todos_collection.find({'user_id': user_id})
     except Exception as e:
         raise CustomException(e,sys)
+    
+

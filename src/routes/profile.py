@@ -2,12 +2,16 @@ from flask import flash,Blueprint, render_template, redirect, url_for, session, 
 from src.profile.verification_email import  send_forget
 from src.profile.forget import generate_reset_token, verify_reset_token
 from src.profile.form import ResetForm
-from src.database import get_user_by_id, users_collection
+from src.profile.pic_profile import handle_profile_pic_upload,allowed_file
+from src.database import get_user_by_id, users_collection,handle_password_update,update_user_info
 from passlib.hash import argon2
 from argon2 import PasswordHasher
 
 profile_bp = Blueprint('profile', __name__)
 argon2 = PasswordHasher()
+
+# profile.py
+
 
 @profile_bp.route('/profile')
 def profile():
@@ -19,11 +23,40 @@ def profile():
     
     if user_data is None:
         return "User not found", 404
-    
-    # Convert ObjectId to string for safety
+
     display_data = {k: v for k, v in user_data.items() if k not in ['_id', 'password']}
     
     return render_template('profile.html', display_data=display_data)
+
+from bson import ObjectId  # Import ObjectId if user_id is of type ObjectId in MongoDB
+
+@profile_bp.route('/update_profile', methods=['GET', 'POST'])
+def update_profile():
+    if 'user' not in session:
+        return redirect(url_for('auth.login'))
+    
+    user_id = session['user']['_id']
+    user_data = get_user_by_id(user_id)
+    
+    if user_data is None:
+        return "User not found", 404
+
+    if request.method == 'POST':
+        update_data = {
+            'name': request.form.get('name'),
+            'dob': request.form.get('dob'),
+            'gender': request.form.get('gender')
+        }
+
+        update_data.update(handle_password_update(request.form.get('password')))
+        update_data.update(handle_profile_pic_upload(request.files.get('profile_pic')))
+
+        update_user_info(user_id, update_data)
+        flash('Your profile has been updated successfully!')
+        return redirect(url_for('profile.profile'))
+
+    return render_template('update_profile.html', user_data=user_data)
+
 
 
 @profile_bp.route('/forgot_password', methods=['GET', 'POST'])

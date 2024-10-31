@@ -7,16 +7,17 @@ from langchain.chains import RetrievalQA
 from dotenv import load_dotenv
 from src.Chatbot.prompt import *
 from langchain_community.vectorstores import Pinecone
-
+import os
 bot_bp = Blueprint('medical', __name__)
 
 load_dotenv()
 
-PINECONE_API_KEY = "pcsk_3DzcR9_LCSUdoWZFpbjCFCCJG5YHKapx5siFvopsWG3Tx9mMXfeRs77qUbFNvjxQgf7KcW"
-PINECONE_API_ENV = "us-east-1"
+GOOGLE_API_KEY = os.getenv("GOOGLE_API_KEY")
+PINECONE_API_KEY = os.getenv("PINECONE_API_KEY")
+PINECONE_API_ENV = os.getenv("PINECONE_API_ENV")
 from pinecone.grpc import PineconeGRPC as Pinecone
 
-pc = Pinecone(api_key="pcsk_3DzcR9_LCSUdoWZFpbjCFCCJG5YHKapx5siFvopsWG3Tx9mMXfeRs77qUbFNvjxQgf7KcW")
+pc = Pinecone(api_key=PINECONE_API_KEY)
 
 embeddings = download_hugging_face_embeddings()
 
@@ -29,7 +30,7 @@ PROMPT = PromptTemplate(template=prompt_template, input_variables=["context", "q
 
 chain_type_kwargs = {"prompt": PROMPT}
 
-llm = ChatGoogleGenerativeAI(model="models/gemini-1.5-flash", temperature=0.8, google_api_key="AIzaSyCsepHbASZrpkouGrSlnkaiRg05P7H5aVs")
+llm = ChatGoogleGenerativeAI(model="models/gemini-1.5-flash", temperature=0.8, google_api_key=GOOGLE_API_KEY)
 
 qa = RetrievalQA.from_chain_type(
     llm=llm, 

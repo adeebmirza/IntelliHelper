@@ -1,6 +1,9 @@
 import requests
+from dotenv import load_dotenv
+import os
+load_dotenv()
 
-BING_API_KEY = "54d88198220844a3b6f4e283b6399972"
+BING_API_KEY = os.getenv("BING_API_KEY")
 
 # Bing News Search API endpoints
 BING_NEWS_SEARCH_URL = "https://api.bing.microsoft.com/v7.0/news/search"

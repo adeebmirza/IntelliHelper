@@ -30,3 +30,5 @@ pinecone-client
 pinecone[grpc]
 boto3
 langchain-huggingface
+spacy
+en-core-web-sm

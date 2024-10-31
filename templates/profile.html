@@ -60,14 +60,25 @@
 
     <div class="profile-card text-center">
         <div class="profile-icon">
-            <i class="bi bi-person-circle"></i>
+            {% if display_data.profile_pic %}
+                <img src="data:image/png;base64,{{ display_data.profile_pic }}" alt="Profile Picture" class="img-fluid rounded-circle" style="width: 400px; height: 400px;">
+            {% else %}
+                <i class="bi bi-person-circle" style="font-size: 100px;"></i>
+            {% endif %}
         </div>
         <h1>Profile</h1>
         {% for key, value in display_data.items() %}
-            <p><strong>{{ key | capitalize }}:</strong> {{ value }}</p>
+            {% if key != 'profile_pic' %}  <!-- Skip displaying profile_pic key -->
+                <p><strong>{{ key | capitalize }}:</strong> {{ value }}</p>
+            {% endif %}
         {% endfor %}
         <a href="{{ url_for('auth.logout') }}" class="btn btn-logout mt-4">Logout</a>
+        
+        <a href="{{ url_for('profile.update_profile') }}">
+            <button type="button">Edit Profile</button>
+        </a>
     </div>
+    
     
 
     <!-- Bootstrap Icons & JS -->

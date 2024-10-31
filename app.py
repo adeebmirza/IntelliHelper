@@ -1,5 +1,5 @@
 # make sure to download python -m spacy download en_core_web_sm
-
+from datetime import timedelta
 from flask import Flask
 from src.routes.auth import auth_bp
 from src.routes.profile import profile_bp
@@ -8,10 +8,19 @@ from src.routes.todo import todo
 from src.routes.news import news_bp
 from src.routes.new_summ import text_summarzize
 from src.routes.medical_bot import bot_bp
+from flask_session import Session
+from flask import Flask, session
 
 app = Flask(__name__)
+app.config['SESSION_TYPE'] = 'filesystem'  # Use filesystem or another server-side option
+app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(hours=12) 
+Session(app)
+
 app.config['SECRET_KEY'] = 'a1b2c3d4e5f67890abcdef1234567890abcdef1234567890abcdef12345678'
 
+@app.before_request
+def make_session_permanent():
+    session.permanent = True
 # Register blueprints
 app.register_blueprint(auth_bp, url_prefix='/auth')
 app.register_blueprint(profile_bp)

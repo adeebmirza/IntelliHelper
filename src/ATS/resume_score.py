@@ -56,7 +56,7 @@ def boost_critical_keywords(job_description, resume_text):
             return boost_factor  # Increase similarity score if key skills match
     return 1  # No boost if no critical skill match
 '''
-# Calculate ATS score based on resume and job description
+# Update calculate_ats_score function to return more detailed feedback
 def calculate_ats_score(resume_text, job_description):
     # Normalize text to ensure uniform comparison
     resume_text = normalize_text(resume_text)
@@ -73,7 +73,22 @@ def calculate_ats_score(resume_text, job_description):
     cosine_sim = cosine_similarity(vectors)
     similarity_score = cosine_sim[0][1] * 100  # Base score
 
-    # Boost score based on critical keyword matches
-    #similarity_score *= boost_critical_keywords(job_description, resume_text)
-    
-    return round(similarity_score, 2)  # Return score as a percentage
+
+# Changed Item by Anas Ahmad as of (28/10/24)
+    # Prepare detailed feedback
+    feedback = {
+        "score": round(similarity_score, 2),
+        "keywords_matched": len(set(resume_keywords.split()).intersection(set(job_keywords.split()))),
+        "total_keywords": len(set(job_keywords.split())),
+        "recommendations": []
+    }
+
+    # Add recommendations based on the score
+    if feedback["score"] < 60:
+        feedback["recommendations"].append("Consider adding more relevant keywords from the job description to improve your resume's visibility to applicant tracking systems (ATS). Focus on including industry-specific terms and phrases that match the skills and qualifications outlined in the job listing. Additionally, make sure your experience section highlights measurable achievements that demonstrate your capabilities.")
+    elif feedback["score"] < 80:
+        feedback["recommendations"].append("Your resume is decent but can be improved with specific examples. Try to quantify your achievements where possible (e.g., 'increased sales by 20% over six months') and provide context for your roles. This can help potential employers better understand your impact in previous positions. Also, ensure that your skills section aligns closely with those mentioned in the job description to enhance relevance.")
+    else:
+        feedback["recommendations"].append("Great job! Your resume is well-tailored for this position. To take it to the next level, consider personalizing your summary or objective statement to reflect your enthusiasm for the role and how your unique skills can contribute to the company's goals. You might also want to include links to your professional online presence, such as a LinkedIn profile or a personal portfolio, to provide further insight into your qualifications.")
+
+    return feedback  # Return score and feedback details

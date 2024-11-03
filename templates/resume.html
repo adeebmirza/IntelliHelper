@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <!-- Meta for Responsive Design -->
     <meta charset="UTF-8">
@@ -8,67 +9,187 @@
     <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/Intelli_Logo.png') }}">
     <!-- CSS Import -->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/resume.css') }}">
-     <!-- Fonts Import -->
+    <!-- Loader CSS and JS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/loader.css') }}">
+    <script src="{{ url_for('static', filename='js/loader.js') }}" defer></script>
+    <!-- Fonts Import -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Abel&display=swap" rel="stylesheet">
     <title>Resume Checker</title>
 </head>
-<body>
-    <!-- Navigation Bar -->
-    <nav>
-        <ul>
-            <li><a href="#">Home</a></li>
-            <li><a href="#">About Us</a></li>
-            <li><a href="#">Tabs</a></li>
-        </ul>
-    </nav>
 
-    <!-- Content Wrapper -->
-    <div class="content-wrapper">
-        <h1>Is Your Resume Good Enough??</h1>
-        <p>Find out then...</p>
-        <p>A free and fast AI resume checker doing 16 crucial checks to ensure your resume is ready to perform and get you interview callbacks.</p>
+<body>
+
+    <div class="shape shape1"></div>
+    <div class="shape shape2"></div>
+    <div class="shape shape3"></div>
+    <div class="shape shape4"></div>
+
+    <div id="loader" class="loader">
+        <img src="{{ url_for('static', filename='images/Giffy-Loader.gif') }}" alt="Loading..." class="loader-gif">
     </div>
 
-    <!-- Form Section -->
-    <form method="POST" enctype="multipart/form-data">
-        <h1>Enter Your Resume And Career</h1>
-        <div class="file-upload-container">
-            <label for="resume" class="file-upload-label">Upload Resume:</label>
-            <input type="file" name="resume" id="resume" class="file-upload" required>
-            <label for="resume" class="file-upload-button">Choose File</label>
-            <span id="file-chosen">No file chosen</span>
+    <!-- Navigation Bar -->
+    <div class="navBar">
+        <div class="logo">
+            IntelliHelper
         </div>
-        
-        <label for="job_description">Job Description:</label>
-        <div>
-            <textarea name="job_description" id="job_description" rows="5" required></textarea>
+        <div class="nav_links">
+            <ul>
+                <li><a href="{{ url_for('about.Home') }}">Home</a></li>
+                <li><a href="{{ url_for('about.about') }}">About Us</a></li>
+                <li>
+                    <button onclick="toggleMenu()">Tabs</button>
+                    <div class="dropdown-menu" style="display: none;">
+                        <ul>
+                            <li><a href="{{ url_for('medical.index') }}" title="Health Bot" >Health Bot</a></li>
+                            <li><a href="{{ url_for('todo_app.index') }}" >To-Do List</a></li>
+                            <li><a href="{{ url_for('news.index') }}" >News</a></li>
+                            <li><a href="{{ url_for('text.index') }}" >News Summary</a></li>
+                            <li><a href="{{ url_for('notes_app.all_notes') }}">Notes</a></li>
+                        </ul>
+                    </div>
+                </li>
+            </ul>
         </div>
-        
-        <button type="submit">Check Resume Score</button>
-        {% if score is not none %}
-            <h2>ATS Score: {{ score }}%</h2>
-        {% endif %}
-    </form>
 
-    <!-- Score Circle -->
-    <div class="score-container">
-        <p>Score:</p>
-        <span id="score-value">0</span>
+        <div class="joining">
+            {% if session.user %}
+            <a href="{{ url_for('profile.profile') }}">
+                <img src="data:image/png;base64,{{ display_data.profile_pic }}" alt="IH"
+                    class="profile-pic" />
+            </a>
+            {% else %}
+            <div class="l_btn"><a href="{{ url_for('auth.login') }}">Login</a></div>
+            <div class="s_btn"><a href="{{ url_for('auth.signup') }}">SignUp</a></div>
+            {% endif %}
+        </div>
+    </div>
+    
+    <div class="separator"></div>
+    
+    <div class="b_check">
+        
+        <!-- Content Wrapper -->
+        <div class="content-wrapper">
+            <p>Resume Checker</p>
+            <h1>Is Your Resume Good Enough??</h1>
+            <span id="content-wrapper-p">
+                <p>Find out then...</p>
+                <p>A free and fast AI resume checker doing 16 crucial checks to ensure your resume is ready to perform
+                    and
+                    get you interview callbacks.</p>
+            </span>
+        </div>
+
+        <!-- Form Section -->
+        <form class="form_btn" method="POST" enctype="multipart/form-data">
+            <h1>Enter Your Resume And Career</h1>
+            <div class="file-upload-container">
+                <label for="resume" class="file-upload-label">Upload Resume:</label>
+                <input type="file" name="resume" id="resume" class="file-upload" required>
+                <label for="resume" class="file-upload-button">Choose File</label>
+                <span id="file-chosen">No file chosen</span>
+            </div>
+    
+            <label for="job_description">Job Description:</label>
+            <div>
+                <textarea name="job_description" id="job_description" rows="5" required></textarea>
+            </div>
+    
+            <button type="submit">Check Resume Score</button>
+            <div class="score-container {% if score is none %}hidden{% endif %}">
+                {% if score is not none %}
+                <h2>ATS Score: {{ score.score }}%</h2>
+                <p><strong>Keywords Matched:</strong> {{ score.keywords_matched }} out of {{ score.total_keywords }}</p>
+                <div class="recommendations">
+                    <h3>Recommendations:</h3>
+                    <ul>
+                        {% for recommendation in score.recommendations %}
+                        <li>{{ recommendation }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                {% endif %}
+            </div>
+    
+        </form>
+        <div class="content-wrapper_2">
+            <h1>Features</h1>
+            <div class="box">
+                <div class="feature-box">
+                    <h3>Fast Analysis</h3>
+                    <p>Get results in seconds, not hours!</p>
+                </div>
+                
+                <div class="feature-box">
+                    <h3>Detailed Feedback</h3>
+                    <p>Receive comprehensive feedback on your resume.</p>
+                </div>
+
+                <div class="feature-box">
+                    <h3>AI-Powered</h3>
+                    <p>Utilizing the latest in AI technology to help you succeed.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-wrapper_3">
+            <h1>How it Works!</h1>
+            <div class="feature-box_1">
+                <p>
+                <ol>
+                    <li>Upload your resume.</li>
+                    <li>Enter the job description.</li>
+                    <li>Receive your score and feedback.</li>
+                </ol>
+                </p>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="footer">
+        <h1>Frequently Asked Questions</h1>
+        <div class="footer-body">
+            <p>Q: Is the resume checker free? <br> A: Yes, it's completely free to use! </p>
+            <p>Q: How secure is my data? <br>A: We prioritize your privacy and security. Your data is not stored.</p>
+        </div>
     </div>
 
     <script>
         const realFileBtn = document.getElementById('resume');
         const fileChosen = document.getElementById('file-chosen');
 
-        realFileBtn.addEventListener('change', function() {
+        realFileBtn.addEventListener('change', function () {
             if (realFileBtn.files.length > 0) {
                 fileChosen.textContent = realFileBtn.files[0].name;
             } else {
                 fileChosen.textContent = "No file chosen";
             }
         });
+
+        function toggleMenu() {
+            const dropdownMenu = document.querySelector('.dropdown-menu');
+            // Toggle display of the dropdown menu
+            if (dropdownMenu.style.display === 'none' || dropdownMenu.style.display === '') {
+                dropdownMenu.style.display = 'block';
+            } else {
+                dropdownMenu.style.display = 'none';
+            }
+        }
+
+        document.addEventListener('click', function (event) {
+            const dropdownMenu = document.querySelector('.dropdown-menu');
+            const toggleButton = document.querySelector('button[onclick="toggleMenu()"]');
+
+            // Check if the click is outside the dropdown and the button
+            if (!dropdownMenu.contains(event.target) && !toggleButton.contains(event.target)) {
+                dropdownMenu.style.display = 'none';
+            }
+        });
     </script>
 </body>
+
 </html>

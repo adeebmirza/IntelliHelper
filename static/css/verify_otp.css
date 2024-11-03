@@ -14,9 +14,25 @@ body {
     height: 100vh;
 }
 
+/* Custom scrollbar styles for WebKit browsers */
+body::-webkit-scrollbar {
+    width: 10px;
+}
+
+body::-webkit-scrollbar-track {
+    background: #f1f8f7;
+    border-radius: 8px;
+}
+
+body::-webkit-scrollbar-thumb {
+    background-color: #337ab7;
+    border-radius: 8px;
+    border: 2px solid #f1f8f7;
+}
+
 /* Main container with blur effect and responsive padding */
 .main-container {
-    background-color: rgba(122, 178, 178, 0.6); 
+    background-color: rgb(169 218 218 / 60%);
     padding: 5%;
     border-radius: 7px;
     width: 80%;
@@ -36,7 +52,7 @@ body {
     width: 100%;
 }
 
-.text-center{
+.text-center {
     font-size: 2em;
 }
 
@@ -78,10 +94,68 @@ button[type="submit"]:hover {
     color: white;
 }
 
+button[type="submit"]:focus {
+    outline: none;
+    box-shadow: 0 0 5px rgba(51, 122, 183, 0.8);
+}
 
+button[type="submit"]:active {
+    background-color: #286090;
+    border-color: #204d74;
+}
 /* Flash message styling */
 .alert {
     margin-top: 20px;
+}
+
+.alert-danger {
+    color: #a94442;
+    background-color: #f2dede;
+    border-color: #ebccd1;
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 1rem;
+}
+
+.alert-success {
+    color: #3c763d;
+    background-color: #dff0d8;
+    border-color: #d6e9c6;
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 1rem;
+}
+
+/* OTP expiry timer */
+.otp-expiry {
+    margin-top: 10px;
+    color: #c0392b;
+    font-size: 1.3rem;
+}
+
+.otp-expired{
+    font-size: 1.3em;
+}
+
+.otp-expired a{
+    color: #1E90FF;
+    text-decoration: none;
+}
+
+.otp-expired a:hover{
+    text-decoration: underline;
+}
+
+/* Screen reader only */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
 }
 
 /* Responsive adjustments */

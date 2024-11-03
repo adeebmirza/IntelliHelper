@@ -11,6 +11,22 @@ body {
     padding: 0;
 }
 
+/* Custom scrollbar styles for WebKit browsers */
+body::-webkit-scrollbar {
+    width: 10px;
+}
+
+body::-webkit-scrollbar-track {
+    background: #f1f8f7;
+    border-radius: 8px;
+}
+
+body::-webkit-scrollbar-thumb {
+    background-color: #337ab7;
+    border-radius: 8px;
+    border: 2px solid #f1f8f7;
+}
+
 .container {
     background-color: rgba(255, 255, 255, 0.4); /* Semi-transparent white */
     backdrop-filter: blur(10px); /* Blur effect */
@@ -98,6 +114,7 @@ input[type="text"], input[type="password"] {
 }
 
 .eye-icon {
+    display: none;
     position: absolute;
     right: 20px;
     top: 65%;

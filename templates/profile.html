@@ -2,88 +2,180 @@
 <html lang="en">
 
 <head>
+    <!-- Meta for Responsive Design -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Profile</title>
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Fav_Icon -->
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/Intelli_Logo.png') }}">
+    <!-- Loader CSS and JS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/loader.css') }}">
+    <script src="{{ url_for('static', filename='js/loader.js') }}" defer></script>
+    <!-- Fonts Import -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Abel&display=swap" rel="stylesheet">
+    <title>{{ display_data.name }} Profile</title>
     <style>
+        /* Body styling */
         body {
             height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            background-color: #1f3b65;
+            background: linear-gradient(135deg, #f4f7f6, #d6e6f2, #c9e0f2, #b7d5f2);
+            font-family: Arial, sans-serif;
+            color: #333;
+            margin: 0;
         }
 
+        /* Profile card styling */
         .profile-card {
             width: 100%;
-            max-width: 600px;
-            padding: 40px;
+            max-width: 500px;
+            padding: 30px;
             border-radius: 15px;
             background-color: white;
             box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
+            text-align: center;
         }
 
         .profile-card h1 {
-            font-size: 3rem;
+            font-size: 2.5rem;
             font-weight: 700;
-            margin-bottom: 20px;
-        }
-
-        .profile-card p {
-            font-size: 1.4rem;
+            color: #1f3b65;
             margin-bottom: 15px;
         }
 
-        .profile-card .profile-icon {
-            font-size: 5rem;
-            color: #2980b9;
+        .profile-card p {
+            font-size: 1rem;
+            margin-bottom: 10px;
+        }
+
+        /* Profile icon or image */
+        .profile-icon {
             margin-bottom: 20px;
         }
 
-        .btn-logout {
-            background-color: #e74c3c;
-            color: white;
-            padding: 10px 30px;
-            font-size: 1.2rem;
-            border-radius: 30px;
+        .profile-icon img {
+            border: 1px solid black;
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
         }
 
-        .btn-logout:hover {
+        /* Button styling */
+        .button {
+            display: inline-block;
+            background-color: #2980b9;
+            color: white;
+            padding: 10px 20px;
+            font-size: 1rem;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            text-decoration: none;
+            margin-top: 15px;
+            margin-right: 10px;
+        }
+
+        .button:hover {
+            background-color: #2174a8;
+        }
+
+        .button-logout {
+            background-color: #e74c3c;
+        }
+
+        .button-logout:hover {
             background-color: #c0392b;
+        }
+
+        /* Floating circles */
+        .floating-circle {
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0.15;
+            background: rgba(100, 150, 220, 0.3);
+            animation: float 10s ease-in-out infinite;
+        }
+
+        .circle1 {
+            width: 150px;
+            height: 150px;
+            top: 10%;
+            left: 20%;
+            animation-duration: 12s;
+        }
+
+        .circle2 {
+            width: 200px;
+            height: 200px;
+            bottom: 15%;
+            right: 25%;
+            animation-duration: 15s;
+        }
+
+        .circle3 {
+            width: 100px;
+            height: 100px;
+            top: 50%;
+            right: 10%;
+            animation-duration: 10s;
+        }
+
+        .circle4 {
+            width: 120px;
+            height: 120px;
+            bottom: 25%;
+            left: 15%;
+            animation-duration: 18s;
+        }
+
+        /* Floating Animation */
+        @keyframes float {
+            0% {
+                transform: translateY(0px) translateX(0px);
+            }
+
+            50% {
+                transform: translateY(-20px) translateX(10px);
+            }
+
+            100% {
+                transform: translateY(0px) translateX(0px);
+            }
         }
     </style>
 </head>
 
 <body>
 
-    <div class="profile-card text-center">
+    <!-- Floating circles for background effect -->
+    <div class="floating-circle circle1"></div>
+    <div class="floating-circle circle2"></div>
+    <div class="floating-circle circle3"></div>
+    <div class="floating-circle circle4"></div>
+
+    <div class="profile-card">
         <div class="profile-icon">
             {% if display_data.profile_pic %}
-                <img src="data:image/png;base64,{{ display_data.profile_pic }}" alt="Profile Picture" class="img-fluid rounded-circle" style="width: 400px; height: 400px;">
+            <img src="data:image/png;base64,{{ display_data.profile_pic }}" alt="Profile Picture">
             {% else %}
-                <i class="bi bi-person-circle" style="font-size: 100px;"></i>
+            <div style="font-size: 100px; color: #2980b9;">👤</div>
             {% endif %}
         </div>
         <h1>Profile</h1>
         {% for key, value in display_data.items() %}
-            {% if key != 'profile_pic' %}  <!-- Skip displaying profile_pic key -->
-                <p><strong>{{ key | capitalize }}:</strong> {{ value }}</p>
-            {% endif %}
+        {% if key != 'profile_pic' %}
+        <p><strong>{{ key | capitalize }}:</strong> {{ value }}</p>
+        {% endif %}
         {% endfor %}
-        <a href="{{ url_for('auth.logout') }}" class="btn btn-logout mt-4">Logout</a>
-        
-        <a href="{{ url_for('profile.update_profile') }}">
-            <button type="button">Edit Profile</button>
-        </a>
+        <a href="{{ url_for('auth.logout') }}" class="button button-logout">Logout</a>
+        <a href="{{ url_for('profile.update_profile') }}" class="button">Edit Profile</a>
+        <a href="{{ url_for('about.Home') }}" class="button">Home</a>
     </div>
-    
-    
 
-    <!-- Bootstrap Icons & JS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>

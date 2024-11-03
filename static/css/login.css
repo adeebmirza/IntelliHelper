@@ -28,6 +28,8 @@ body {
     
 }
 
+
+
 .container {
     display: flex;
     justify-content: space-evenly;
@@ -152,6 +154,7 @@ input[type="text"], input[type="password"] {
 }
 
 .eye-icon {
+    display: none;
     position: absolute;
     right: 10px;
     top: 65%;

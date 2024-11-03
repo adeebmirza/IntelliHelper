@@ -4,7 +4,7 @@ from src.Intelli_News.intelli_news_function import search_bing_news, get_latest_
 
 news_bp = Blueprint('news', __name__)
 
-@news_bp.route('/', methods=['GET'])
+@news_bp.route('/Intelli_news', methods=['GET'])
 def index():
     # Check if a search query is provided in the URL
     query = request.args.get('query')

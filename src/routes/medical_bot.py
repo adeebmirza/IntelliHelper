@@ -1,4 +1,5 @@
-from flask import Blueprint, render_template, request
+from src.database import get_user_by_id
+from flask import Blueprint, render_template, request,redirect, url_for, session
 from src.Chatbot.helper import download_hugging_face_embeddings
 from langchain_pinecone import PineconeVectorStore
 from langchain.prompts import PromptTemplate
@@ -40,9 +41,20 @@ qa = RetrievalQA.from_chain_type(
     chain_type_kwargs=chain_type_kwargs
 )
 
+
 @bot_bp.route("/chat")
 def index():
-    return render_template('chat.html')
+    user_id = session.get('user', {}).get('_id')  # Access user ID from the session
+    if not user_id:
+        return redirect(url_for('auth.login'))  # Redirect if not logged in
+    
+    user_data = get_user_by_id(user_id)  # Retrieve user data from the database
+    display_data = {
+        'profile_pic': user_data.get('profile_pic'),
+        'name': user_data.get('name')
+    }
+
+    return render_template('chat.html', display_data=display_data)  # Pass user data to the template
 
 @bot_bp.route("/get", methods=["GET", "POST"])
 def chat():

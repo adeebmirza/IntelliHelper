@@ -4,134 +4,147 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/Intelli_Logo.png') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/loader.css') }}">
+    <script src="{{ url_for('static', filename='js/loader.js') }}" defer></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Abel&display=swap" rel="stylesheet">
     <title>Update Profile</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
     <style>
         body {
-            background-color: #e9ecef; /* Light gray background */
-            font-family: 'Arial', sans-serif;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #f4f7f6, #d6e6f2, #c9e0f2, #b7d5f2);
+            font-family: Arial, sans-serif;
+            color: #333;
+            margin: 0;
+            overflow: hidden; /* Prevents scrolling */
         }
-
-        .container {
-            max-width: 700px;
-            margin: 60px auto;
-            padding: 30px;
-            background-color: #ffffff;
+    
+        .profile-card {
+            width: 90%;
+            max-width: 500px;
+            padding: 20px; /* Reduced padding */
             border-radius: 15px;
-            box-shadow: 0 4px 25px rgba(0, 0, 0, 0.1);
-            border: 1px solid #dee2e6; /* Border for subtle definition */
-        }
-
-        h2 {
+            background-color: white;
+            box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
             text-align: center;
-            margin-bottom: 30px;
-            color: #343a40; /* Dark gray for the heading */
         }
-
-        .flash-messages {
-            color: #dc3545; /* Bootstrap danger color for errors */
-            list-style-type: none;
-            padding: 0;
+    
+        .profile-card h1 {
+            font-size: 2rem; /* Reduced font size */
+            font-weight: 700;
+            color: #1f3b65;
+            margin-bottom: 10px; /* Adjusted spacing */
         }
-
-        .btn-custom {
-            background-color: #007bff; /* Bootstrap primary color */
-            color: white;
-            border-radius: 5px;
-        }
-
-        .btn-custom:hover {
-            background-color: #0056b3; /* Darker blue on hover */
-        }
-
-        .btn-secondary {
-            background-color: #6c757d; /* Gray color for cancel button */
-            color: white;
-            border-radius: 5px;
-        }
-
-        .btn-secondary:hover {
-            background-color: #5a6268; /* Darker gray on hover */
-        }
-
-        .form-control {
-            margin-bottom: 15px;
-            border: 1px solid #ced4da; /* Light border */
-            transition: border-color 0.2s ease-in-out;
-        }
-
-        .form-control:focus {
-            border-color: #007bff; /* Blue border on focus */
-            box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
-        }
-
-        .profile-pic {
-            display: block;
-            margin: 10px auto;
+    
+        .profile-icon img {
+            width: 120px; /* Reduced size */
+            height: 120px;
             border-radius: 50%;
-            width: 100px;
-            height: 100px;
             object-fit: cover;
-            border: 2px solid #007bff; /* Border around the image */
+            margin-bottom: 15px;
         }
-
-        label {
-            font-weight: bold; /* Bold labels for clarity */
-            color: #495057; /* Dark gray for labels */
-        }
-
+    
         .form-group {
-            margin-bottom: 20px;
+            margin-bottom: 12px; /* Reduced spacing */
+            text-align: left;
         }
-
-        /* Additional styles for better layout */
-        .text-center {
-            margin-top: 20px;
+    
+        label {
+            font-weight: bold;
+            color: #495057;
+            font-size: 0.9rem; /* Slightly smaller label */
         }
-
-        /* Responsive adjustments */
-        @media (max-width: 768px) {
-            .container {
-                margin: 20px;
-                padding: 20px;
-            }
-
-            .profile-pic {
-                width: 80px;
-                height: 80px;
-            }
+    
+        input, select {
+            width: 100%; /* Full width */
+            padding: 8px;
+            font-size: 0.9rem;
+            border: 1px solid #ced4da;
+            border-radius: 5px;
+            margin-top: 4px;
+            box-sizing: border-box; /* Ensures padding doesn’t affect total width */
+        }
+    
+        .form-group input:focus, .form-group select:focus {
+            border-color: #2980b9;
+            box-shadow: 0 0 4px rgba(41, 128, 185, 0.5);
+        }
+    
+        .button {
+            background-color: #2980b9;
+            color: white;
+            padding: 8px 16px; /* Reduced padding */
+            font-size: 0.9rem;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            margin-top: 10px;
+            margin-right: 8px;
+            display: inline-block;
+        }
+    
+        .button:hover {
+            background-color: #2174a8;
+        }
+    
+        .button-cancel {
+            background-color: #6c757d;
+        }
+    
+        .button-cancel:hover {
+            background-color: #5a6268;
+        }
+    
+        /* Adjusted floating circle styles */
+        .floating-circle {
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0.1;
+            background: rgba(100, 150, 220, 0.3);
+            animation: float 10s ease-in-out infinite;
+        }
+        .circle1 { width: 120px; height: 120px; top: 10%; left: 20%; animation-duration: 12s; }
+        .circle2 { width: 150px; height: 150px; bottom: 15%; right: 25%; animation-duration: 15s; }
+        .circle3 { width: 80px; height: 80px; top: 50%; right: 10%; animation-duration: 10s; }
+        .circle4 { width: 100px; height: 100px; bottom: 25%; left: 15%; animation-duration: 18s; }
+    
+        @keyframes float {
+            0% { transform: translateY(0px) translateX(0px); }
+            50% { transform: translateY(-15px) translateX(8px); }
+            100% { transform: translateY(0px) translateX(0px); }
         }
     </style>
+    
 </head>
 
 <body>
-    <div class="container">
-        <h2><strong>Update Profile</strong> </h2>
 
-        {% with messages = get_flashed_messages() %}
-            {% if messages %}
-                <ul class="flash-messages">
-                    {% for message in messages %}
-                        <li>{{ message }}</li>
-                    {% endfor %}
-                </ul>
-            {% endif %}
-        {% endwith %}
+    <div class="floating-circle circle1"></div>
+    <div class="floating-circle circle2"></div>
+    <div class="floating-circle circle3"></div>
+    <div class="floating-circle circle4"></div>
 
+    <div class="profile-card">
+        <h1>Update Profile</h1>
         <form action="{{ url_for('profile.update_profile') }}" method="POST" enctype="multipart/form-data">
             <div class="form-group">
-                <label for="name" class="form-label">Name:</label>
-                <input type="text" id="name" name="name" class="form-control" value="{{ user_data.name }}" required>
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" value="{{ user_data.name }}" required>
             </div>
 
             <div class="form-group">
-                <label for="dob" class="form-label">Date of Birth:</label>
-                <input type="date" id="dob" name="dob" class="form-control" value="{{ user_data.dob }}" required>
+                <label for="dob">Date of Birth:</label>
+                <input type="date" id="dob" name="dob" value="{{ user_data.dob }}" required>
             </div>
 
             <div class="form-group">
-                <label for="gender" class="form-label">Gender:</label>
-                <select id="gender" name="gender" class="form-select" required>
+                <label for="gender">Gender:</label>
+                <select id="gender" name="gender" required>
                     <option value="" disabled>Select Gender</option>
                     <option value="Male" {% if user_data.gender == 'Male' %}selected{% endif %}>Male</option>
                     <option value="Female" {% if user_data.gender == 'Female' %}selected{% endif %}>Female</option>
@@ -140,24 +153,21 @@
             </div>
 
             <div class="form-group">
-                <label for="password" class="form-label">New Password:</label>
-                <input type="password" id="password" name="password" class="form-control" placeholder="Enter new password">
+                <label for="password">New Password:</label>
+                <input type="password" id="password" name="password" placeholder="Enter new password">
             </div>
 
             <div class="form-group">
-                <label for="profile_pic" class="form-label">Profile Picture:</label>
-                <input type="file" id="profile_pic" name="profile_pic" class="form-control" accept="image/*">
-                {% if user_data.profile_pic %}
-                    <img src="data:image/png;base64,{{ user_data.profile_pic }}" alt="Profile Picture" class="profile-pic">
-                {% endif %}
+                <label for="profile_pic">Profile Picture:</label>
+                <input type="file" id="profile_pic" name="profile_pic" accept="image/*">
+                
             </div>
 
-            <div class="text-center">
-                <button type="submit" class="btn btn-custom">Save Changes</button>
-                <a href="{{ url_for('profile.profile') }}" class="btn btn-secondary">Cancel</a>
-            </div>
+            <button type="submit" class="button">Save Changes</button>
+            <a href="{{ url_for('profile.profile') }}" class="button button-cancel">Cancel</a>
         </form>
     </div>
+
 </body>
 
 </html>

@@ -1,16 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Meta for Responsive Design -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Fav_Icon -->
     <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/Intelli_Logo.png') }}">
+    <!-- CSS Import -->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/signup.css') }}">
+    <!-- Loader CSS and JS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/loader.css') }}">
+    <script src="{{ url_for('static', filename='js/loader.js') }}" defer></script>
+    <!-- Fonts Import -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Abel&display=swap" rel="stylesheet">
     <title>Signup - IntelliHelper</title>
 </head>
-
 <body>
     <div class="container">
         {% with messages = get_flashed_messages(with_categories=true) %}
@@ -22,6 +28,10 @@
                 {% endfor %}
             {% endif %}
         {% endwith %}
+
+        <div id="loader" class="loader">
+            <img src="{{ url_for('static', filename='images/Giffy-Loader.gif') }}" alt="Loading..." class="loader-gif">
+        </div>
         
         <div class="login-section">
             <h2>Already a member?</h2>
@@ -30,7 +40,8 @@
 
         <div class="signup-section">
             <h2>Sign Up</h2>
-            <form method="POST">
+            
+            <form id="signupForm" method="POST">
                 {{ form.hidden_tag() }}
 
                 <div class="input-group">
@@ -47,30 +58,22 @@
                     {{ form.email.label }}
                     {{ form.email(oninvalid="this.setCustomValidity('Please enter a valid email')", oninput="setCustomValidity('')") }}
                 </div>
-
-                <div class="input-group">
-                    {{ form.gender.label }}
-                    {{ form.gender(oninvalid="this.setCustomValidity('Please select your gender')", oninput="setCustomValidity('')") }}
-                </div>
-
-                <div class="input-group">
-                    {{ form.dob.label }}
-                    {{ form.dob(type="date", oninvalid="this.setCustomValidity('Please enter a valid date of birth')", oninput="setCustomValidity('')") }}
-                </div>
-
+                
                 <div class="input-group password-container">
                     {{ form.password.label }}
                     {{ form.password(oninvalid="this.setCustomValidity('Please enter a password')", oninput="setCustomValidity('')") }}
-                    <span class="eye-icon" id="eyeIcon" onclick="togglePassword()">
-                        <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="#337ab7">
-                            <path d="M480-320q75 0 127.5-52.5T660-500q0-75-52.5-127.5T480-680q-75 0-127.5 52.5T300-500q0 75 52.5 127.5T480-320Zm0-72q-45 0-76.5-31.5T372-500q0-45 31.5-76.5T480-608q45 0 76.5 31.5T588-500q0 45-31.5 76.5T480-392Zm0 192q-146 0-266-81.5T40-500q54-137 174-218.5T480-800q146 0 266 81.5T920-500q-54 137-174 218.5T480-200Zm0-300Zm0 220q113 0 207.5-59.5T832-500q-50-101-144.5-160.5T480-720q-113 0-207.5 59.5T128-500q50 101 144.5 160.5T480-280Z"/>
+                    <span class="eye-icon" id="eyeIcon">
+                        <!-- Default closed eye icon -->
+                        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#337ab7">
+                            <path d="M480-320q75 0 127.5-52.5T660-500q0-75-52.5-127.5T480-680q-75 0-127.5 52.5T300-500q0 75 52.5 127.5T480-320Zm0-72q-45 0-76.5-31.5T372-500q0-45 31.5-76.5T480-608q45 0 76.5 31.5T588-500q0 45-31.5 76.5T480-392Zm0 192q-146 0-266-81.5T40-500q54-137 174-218.5T480-800q146 0 266 81.5T920-500q-54 137-174 218.5T480-200Z"/>
                         </svg>
                     </span>
                 </div>
-
+                
                 <div class="input-group">
                     {{ form.confirm_password.label }}
                     {{ form.confirm_password(oninvalid="this.setCustomValidity('Please confirm your password')", oninput="setCustomValidity('')") }}
+                    <div id="passwordError" style="color: red; display: none;">Passwords do not match!</div>
                 </div>
 
                 <div class="signup-btn">
@@ -80,20 +83,68 @@
         </div>
     </div>
 
+    <!-- JavaScript to toggle password visibility and validate password match -->
     <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const passwordInput = document.querySelector('input[name="password"]');
+            const confirmPasswordInput = document.querySelector('input[name="confirm_password"]');
+            const eyeIcon = document.getElementById('eyeIcon');
+            const form = document.getElementById('signupForm');
+            const passwordError = document.getElementById('passwordError');
+
+            // Show the eye icon when the password input is focused
+            passwordInput.addEventListener('focus', function() {
+                eyeIcon.style.display = 'block';
+            });
+
+            // Hide the eye icon only if the password field is empty and loses focus
+            passwordInput.addEventListener('blur', function() {
+                if (passwordInput.value.length === 0) {
+                    eyeIcon.style.display = 'none';
+                }
+            });
+
+            // Update the visibility of the icon based on the input field content
+            passwordInput.addEventListener('input', function() {
+                if (passwordInput.value.length > 0) {
+                    eyeIcon.style.display = 'block';
+                } else {
+                    eyeIcon.style.display = 'none';
+                }
+            });
+
+            eyeIcon.addEventListener('click', togglePassword);
+
+            // Password matching validation on form submission
+            form.addEventListener('submit', function(event) {
+                if (passwordInput.value !== confirmPasswordInput.value) {
+                    event.preventDefault(); // Prevent form submission
+                    passwordError.style.display = 'block'; // Show error message
+                } else {
+                    passwordError.style.display = 'none'; // Hide error message if passwords match
+                }
+            });
+        });
+
         function togglePassword() {
             const passwordInput = document.querySelector('input[name="password"]');
             const eyeIcon = document.getElementById('eyeIcon');
-            
-            const openEyeSvg = `<svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="#337ab7"><path d="M480-320q75 0 127.5-52.5T660-500q0-75-52.5-127.5T480-680q-75 0-127.5 52.5T300-500q0 75 52.5 127.5T480-320Zm0-72q-45 0-76.5-31.5T372-500q0-45 31.5-76.5T480-608q45 0 76.5 31.5T588-500q0 45-31.5 76.5T480-392Zm0 192q-146 0-266-81.5T40-500q54-137 174-218.5T480-800q146 0 266 81.5T920-500q-54 137-174 218.5T480-200Zm0-300Zm0 220q113 0 207.5-59.5T832-500q-50-101-144.5-160.5T480-720q-113 0-207.5 59.5T128-500q50 101 144.5 160.5T480-280Z"/></svg>`;
-            const closedEyeSvg = `<svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="#337ab7"><path d="M644-428l-58-58q9-47-27-88t-93-32l-58-58q17-8 34.5-12t37.5-4q75 0 127.5 52.5T660-500q0 20-4 37.5T644-428Zm128 126l-58-56q38-29 67.5-63.5T832-500q-50-101-143.5-160.5T480-720q-29 0-57 4t-55 12l-62-62q41-17 84-25.5t90-8.5q151 0 269 83.5T920-500q-23 59-60.5 109.5T772-302Zm20 246L624-222q-35 11-70.5 16.5T480-200q-151 0-269-83.5T40-500q21-53 53-98.5t73-81.5L56-792l56-56 736 736-56 56ZM222-624q-29 26-53 57t-53 57Z"/></svg>`;
+
+            const eyeOpenSvg = `
+                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#337ab7">
+                    <path d="M644-428l-58-58q9-47-27-88t-93-32l-58-58q17-8 34.5-12t37.5-4q75 0 127.5 52.5T660-500q0 20-4 37.5T644-428Zm128 126l-58-56q38-29 67.5-63.5T832-500q-50-101-144.5-160.5T480-720q-29 0-57 4t-55 12l-62-62q41-17 84-25.5t90-8.5q151 0 269 83.5T920-500q-23 59-60.5 109.5T772-302Zm20 246L624-222q-35 11-70.5 16.5T480-200q-151 0-269-83.5T40-500q21-53 53-98.5t73-81.5L56-792l56-56 736 736-56 56ZM222-624q-29 26-53 57t-53 57Zm-31 23Zm0-248Zm0 75Z"/>
+                </svg>`;
+            const eyeClosedSvg = `
+                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#337ab7">
+                    <path d="M480-320q75 0 127.5-52.5T660-500q0-75-52.5-127.5T480-680q-75 0-127.5 52.5T300-500q0 75 52.5 127.5T480-320Zm0-72q-45 0-76.5-31.5T372-500q0-45 31.5-76.5T480-608q45 0 76.5 31.5T588-500q0 45-31.5 76.5T480-392Zm0 192q-146 0-266-81.5T40-500q54-137 174-218.5T480-800q146 0 266 81.5T920-500q-54 137-174 218.5T480-200Z"/>
+                </svg>`;
 
             if (passwordInput.type === "password") {
                 passwordInput.type = "text";
-                eyeIcon.innerHTML = closedEyeSvg;
+                eyeIcon.innerHTML = eyeOpenSvg;
             } else {
                 passwordInput.type = "password";
-                eyeIcon.innerHTML = openEyeSvg;
+                eyeIcon.innerHTML = eyeClosedSvg;
             }
         }
     </script>

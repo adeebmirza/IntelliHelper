@@ -13,9 +13,7 @@ argon2 = PasswordHasher()
 otp_secrets = {}
 
 
-@auth_bp.route('/', methods=['GET'])
-def Home():
-    return render_template('index.html')
+
 
 
 @auth_bp.route('/signup', methods=['GET', 'POST'])
@@ -86,7 +84,7 @@ def login():
             if argon2.verify(user['password'], password):
                 user['_id'] = str(user['_id'])  # Convert ObjectId to string for session storage
                 session['user'] = user
-                return redirect(url_for('auth.Home'))
+                return redirect(url_for('about.Home'))
             else:
                 flash('Invalid password', 'error')
         except VerifyMismatchError:
@@ -98,4 +96,4 @@ def login():
 @auth_bp.route('/logout')
 def logout():
     session.pop('user', None)
-    return redirect(url_for('auth.Home'))
+    return redirect(url_for('about.Home'))

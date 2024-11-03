@@ -9,6 +9,9 @@
     <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/Intelli_Logo.png') }}">
     <!-- CSS Import -->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
+    <!-- Loader CSS and JS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/loader.css') }}">
+    <script src="{{ url_for('static', filename='js/loader.js') }}" defer></script>
     <!-- Fonts Import -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -17,6 +20,10 @@
 </head>
 
 <body>
+    <div id="loader" class="loader">
+        <img src="{{ url_for('static', filename='images/Giffy-Loader.gif') }}" alt="Loading..." class="loader-gif">
+    </div>
+
     <div>
         <div class="wave"></div>
         <div class="wave"></div>
@@ -28,16 +35,18 @@
         </div>
         <div class="nav_links">
             <ul>
-                
+                <li><a href="{{ url_for('about.Home') }}">Home</a></li>
+                <li><a href="{{ url_for('about.about') }}">About Us</a></li>
                 <li>
                     <button onclick="toggleMenu()">Tabs</button>
                     <div class="dropdown-menu" style="display: none;">
                         <ul>
-                            <li><a href="#">Health Bot</a></li>
+                            <li><a href="{{ url_for('medical.index') }}" title="Health Bot">Health Bot</a></li>
                             <li><a href="{{ url_for('ats.index') }}">Resume Checker</a></li>
                             <li><a href="{{ url_for('todo_app.index') }}">To-Do List</a></li>
-                            <li><a href="#">White Board</a></li>
-                            <li><a href="#">News Summary</a></li>
+                            <li><a href="{{ url_for('news.index') }}">News</a></li>
+                            <li><a href="{{ url_for('text.index') }}">News Summary</a></li>
+                            <li><a href="{{ url_for('notes_app.all_notes') }}">Notes</a></li>
                         </ul>
                     </div>
                 </li>
@@ -45,39 +54,49 @@
         </div>
 
         <div class="joining">
-            {% if session.get('user_logged_in') %}
-            <!-- Profile Circle -->
-            <div class="profile-circle">
-                <a href="{{ url_for('profile.profile') }}">Profile</a>
-            </div>
+            {% if session.user %}
+                <a href="{{ url_for('profile.profile') }}">
+                    {% if display_data.profile_pic %}
+                        <img src="data:image/png;base64,{{ display_data.profile_pic }}" alt="IH" class="profile-pic" />
+                    {% else %}
+                        <img src="{{ url_for('static', filename='images/dummy_profile_pic.png') }}" alt="IH" class="profile-pic" />
+                    {% endif %}
+                </a>
             {% else %}
-            <!-- Login and Signup Buttons -->
-            <div class="l_btn"><a href="{{ url_for('auth.login') }}">Login</a></div>
-            <div class="s_btn"><a href="{{ url_for('auth.signup') }}">SignUp</a></div>
+                <div class="l_btn"><a href="{{ url_for('auth.login') }}">Login</a></div>
+                <div class="s_btn"><a href="{{ url_for('auth.signup') }}">SignUp</a></div>
             {% endif %}
         </div>
+        
+
     </div>
 
     <div class="separator"></div>
 
     <div class="jumbotron">
         <div class="j_data">
-            JOIN..IMPORVE..<span id="j_data_highlight">LEARN.</span><br><br>
+            JOIN..IMPORVE..<span id="j_data_highlight">LEARN.</span> 
+            <div id="countdown" style="margin-top: 20px; font-size: 45px; font-weight: bold;"></div>
+            <br><br>
             Welcome To IntelliHelper!!<br>Get your Solutions<br>Right Now
         </div>
     </div>
 
     <div class="health_bot">
-        <input onclick="togglebot()" type="text" placeholder="Enter your Symptoms or Health Concerns...">
+        <input onclick="togglebot()" type="text" placeholder="Enter your Symptoms or Health Concerns..." readonly>
     </div>
 
     <div class="health_bot_tab">
         <button onclick="togglebot()" class="close-btn">Close</button>
-        <div class="hbt_text">
-            <input type="text" placeholder="Enter your Symptoms or Health Concerns...">
-        </div>
         <div class="chat_area">
-            
+            <div id="messageArea" class="message-area"></div>
+        </div>
+
+        <div class="hbt_text">
+            <form id="chatForm">
+                <input type="text" id="text" placeholder="Type your message..." autocomplete="off" required>
+                <button type="submit"><i class="fas fa-location-arrow"></i> Send</button>
+            </form>
         </div>
     </div>
 
@@ -86,12 +105,12 @@
 
     <div class="bottom_links">
         <ul>
-            <li><a href="{{ url_for('ats.index') }}" title="Resume Checker">📄</a></li>
-            <li><a href="{{ url_for('medical.index') }}" title="Health Bot">🩺</a></li>
-            <li><a href="{{ url_for('todo_app.index') }}" title="To-Do List">📝</a></li>
-            <li><a href="#" title="Whiteboard">🖌️</a></li>
-            <li><a href="{{ url_for('text.index') }}" title="News Summary">📰</a></li>
-
+            <li><a href="{{ url_for('ats.index') }}" title="Resume Checker" target="_blank">📄</a></li>
+            <li><a href="{{ url_for('medical.index') }}" title="Health Bot" target="_blank">🩺</a></li>
+            <li><a href="{{ url_for('todo_app.index') }}" title="To-Do List" target="_blank">📝</a></li>
+            <li><a href="{{ url_for('news.index') }}" title="News" target="_blank">📰</a></li>
+            <li><a href="{{ url_for('text.index') }}" title="News Summary" target="_blank">📋</a></li>
+            <li><a href="{{ url_for('text.index') }}" title="Notes" target="_blank">&#128466</a></li>
         </ul>
     </div>
 
@@ -123,6 +142,64 @@
         }
 
     </script>
-</body>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script>
+
+        $(document).ready(function() {
+            $("#chatForm").on("submit", function(event) {
+                event.preventDefault();
+
+                const date = new Date();
+                const time = `${date.getHours()}:${date.getMinutes().toString().padStart(2, '0')}`;
+                const userInput = $("#text").val();
+
+                const userMessage = `
+                    <div class="msg-container user">
+                        <div class="message">${userInput}</div>
+                        <div class="msg-time">${time}</div>
+                    </div>
+                `;
+
+                $("#messageArea").append(userMessage);
+                $("#text").val("");
+
+                $.ajax({
+                    data: { msg: userInput },
+                    type: "POST",
+                    url: "/get",
+                }).done(function(response) {
+                    const botMessage = `
+                        <div class="msg-container bot">
+                            <div class="message">${response}</div>
+                            <div class="msg-time">${time}</div>
+                        </div>
+                    `;
+                    $("#messageArea").append(botMessage);
+                    $("#messageArea").scrollTop($("#messageArea")[0].scrollHeight);
+                });
+            });
+        });
+
+        function updateCountdown() {
+            const now = new Date();
+            const newYear = new Date(now.getFullYear() + 1, 0, 1);
+            const timeLeft = newYear - now;
+    
+            // Calculate days, hours, minutes, and seconds
+            const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+    
+            // Update the countdown element
+            document.getElementById("countdown").innerHTML =
+                `Complete your goals before the clock strikes the new Dawn! <br> <span class="timer">${days}d ${hours}h ${minutes}m ${seconds}s</span>`;
+        }
+    
+        // Update the countdown every second
+        setInterval(updateCountdown, 1000);
+        updateCountdown();
+    </script>
+</body>
 </html>

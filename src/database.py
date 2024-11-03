@@ -13,11 +13,14 @@ from src.logger import logger
 argon2 = PasswordHasher()
 load_dotenv()
 
+mongo_url=os.getenv("MONGO_URL")
+
 try:
-    client = MongoClient("mongodb://localhost:27017")
+    client = MongoClient(mongo_url)
     db = client['IntelliHelper']
     users_collection = db['users']
     todos_collection = db['todos']
+    notes_collection = db['notes']
 except Exception as e:
     raise CustomException(e,sys)
 
@@ -69,3 +72,4 @@ def get_todos(user_id):
         raise CustomException(e,sys)
     
 
+#notes

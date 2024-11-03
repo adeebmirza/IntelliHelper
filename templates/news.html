@@ -2,167 +2,32 @@
 <html lang="en">
 
 <head>
+    <!-- Meta for Responsive Design -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description"
-        content="Stay updated with the latest news from various categories including Sports, Money, Weather, Health, and Travel.">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <!-- CSS Import -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/news.css') }}">
+    <!-- Fav_Icon -->
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/Intelli_Logo.png') }}">
+    <!-- Loader CSS and JS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/loader.css') }}">
+    <script src="{{ url_for('static', filename='js/loader.js') }}" defer></script>
+    <!-- Fonts Import -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Abel&display=swap" rel="stylesheet">
     <title>IntelliHelper News</title>
-    <style>
-        body {
-            font-family: 'Roboto', sans-serif;
-            background: linear-gradient(to bottom, #e9ecef, #f0f2f5);
-            margin: 0;
-            padding: 0;
-            color: #333;
-        }
-
-        h1 {
-            text-align: center;
-            margin: 30px 0;
-            color: #4CAF50;
-        }
-
-        .navbar {
-            display: flex;
-            justify-content: center;
-            background-color: #333;
-            padding: 14px 0;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
-
-        .navbar a {
-            color: white;
-            padding: 14px 20px;
-            text-decoration: none;
-            font-size: 17px;
-            transition: background-color 0.3s;
-        }
-
-        .navbar a:hover {
-            background-color: #4CAF50;
-            border-radius: 5px;
-        }
-
-        .container {
-            display: flex;
-            justify-content: space-between;
-            padding: 20px;
-            max-width: 1200px;
-            margin: auto;
-        }
-
-        .cards-section {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 20px;
-            width: 70%;
-        }
-
-        .card {
-            background-color: white;
-            border-radius: 15px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-            margin-bottom: 20px;
-            overflow: hidden;
-            transition: transform 0.3s;
-            width: calc(50% - 10px);
-        }
-
-        .card:hover {
-            transform: translateY(-5px);
-        }
-
-        .card img {
-            width: 100%;
-            height: auto; /* Maintain the image’s aspect ratio */
-            max-height: 300px; /* Increase the maximum height if image quality allows */
-            object-fit: cover;
-            border-bottom: 5px solid #4CAF50;
-            image-rendering: -webkit-optimize-contrast; /* High quality for sharp displays */
-        }
-
-        .card-content {
-            padding: 15px;
-        }
-
-        .card-content h3 {
-            font-size: 18px;
-            margin: 10px 0;
-            color: #555;
-        }
-
-        .sidebar {
-            background-color: white;
-            border-radius: 15px;
-            padding: 15px;
-            width: 25%;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-        }
-
-        .sidebar h3 {
-            margin-top: 0;
-            color: #4CAF50;
-        }
-
-        .related-news img {
-            width: 50px;
-            height: 50px;
-            margin-right: 10px;
-            vertical-align: middle;
-            border-radius: 5px;
-            image-rendering: -webkit-optimize-contrast;
-        }
-
-        form {
-            text-align: center;
-            margin: 20px 0;
-        }
-
-        input[type="text"] {
-            padding: 10px;
-            width: 50%;
-            font-size: 16px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-
-        button {
-            padding: 10px 20px;
-            font-size: 16px;
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            cursor: pointer;
-            border-radius: 5px;
-            transition: background-color 0.3s;
-        }
-
-        button:hover {
-            background-color: #45a049;
-        }
-
-        @media (max-width: 768px) {
-            .cards-section {
-                width: 100%;
-            }
-
-            .card {
-                width: 100%;
-            }
-
-            .sidebar {
-                width: 100%;
-                margin-top: 20px;
-            }
-        }
-    </style>
 </head>
 
 <body>
+    <div class="bg"></div>
+    <div class="bg bg2"></div>
+    <div class="bg bg3"></div>
+
+    <div id="loader" class="loader">
+        <img src="{{ url_for('static', filename='images/Giffy-Loader.gif') }}" alt="Loading..." class="loader-gif">
+    </div>
+
     <div class="navbar">
         <a href="/">Discover</a>
         <a href="/category/news">News</a>
@@ -171,10 +36,11 @@
         <a href="/category/weather">Weather</a>
         <a href="/category/health">Health</a>
         <a href="/category/travel">Travel</a>
+        <a href="{{ url_for('about.Home') }}">Home</a>
     </div>
     <h1>IntelliHelper News Search</h1>
     <form method="GET" action="/">
-        <input type="text" name="query" placeholder="Search for news..." required>
+        <input type="text" name="query" placeholder="Search for news..." required autocomplete="off">
         <button type="submit">Search</button>
     </form>
     <div class="container">
@@ -183,10 +49,9 @@
             <ul>
                 {% for result in results[:5] %}
                 <li>
-                    {% if result.image_url %}
-                    <img src="{{ result.image_url }}?quality=high" alt="Related News Image">
-                    {% endif %}
-                    <a href="{{ result['url'] }}" target="_blank">{{ result['name'] }}</a>
+                    <img src="{{ result.image_url if result.image_url else url_for('static', filename='images/Intelli_Logo.png') }}"
+                        alt="Related News Image" onerror="this.src=fallbackImage">
+                    <a href="{{ result['url'] }}" target="_blank">{{ result['name'] | safe }}</a>
                 </li>
                 {% endfor %}
             </ul>
@@ -194,20 +59,23 @@
         <div class="cards-section">
             {% for result in results %}
             <div class="card">
-                {% if result.image_url %}
-                <img src="{{ result.image_url }}?quality=high" alt="News Image">
-                {% endif %}
+                <img src="{{ result.image_url if result.image_url else url_for('static', filename='images/default-image.png') }} "
+                    alt="News Image" onerror="this.src=fallbackImage">
                 <div class="card-content">
                     <p class="meta">
-                        <a href="{{ result['url'] }}" target="_blank">{{ result['name'] }}</a>
+                        <a href="{{ result['url'] }}" target="_blank">{{ result['name'] | safe }}</a>
                     </p>
-                    <h3>{{ result['description'] }}</h3>
+                    <h3>{{ result['description'] | safe }}</h3>
                 </div>
             </div>
             {% endfor %}
         </div>
-        
     </div>
+
+    <script>
+        const fallbackImage = "{{ url_for('static', filename='images/Intelli_Logo.png') }}";
+    </script>
+
 </body>
 
 </html>

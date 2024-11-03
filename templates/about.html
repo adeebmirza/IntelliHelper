@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Meta for Responsive Design -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Fav_Icon -->
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/Intelli_Logo.png') }}">
+    <!-- CSS Import -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/about.css') }}">
+    <!-- Loader CSS and JS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/loader.css') }}">
+    <script src="{{ url_for('static', filename='js/loader.js') }}" defer></script>
+    <!-- Fonts Import -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Abel&display=swap" rel="stylesheet">
+    <title>About Us</title>
+</head>
+
+<body>
+    <div id="loader" class="loader">
+        <img src="{{ url_for('static', filename='images/Giffy-Loader.gif') }}" alt="Loading..." class="loader-gif">
+    </div>
+
+    <div class="about-container">
+        <!-- Title Section -->
+        <h1 class="h1-main">About Us</h1>
+        <div class="title-section">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" class="section-image" fill="currentColor">
+                <path d="M32 4C17.664 4 6 15.664 6 30s11.664 26 26 26 26-11.664 26-26S46.336 4 32 4zm0 48c-12.064 0-22-9.936-22-22S19.936 8 32 8s22 9.936 22 22-9.936 22-22 22z"/>
+                <path d="M26 18h-2v20h2V18zm12 0h-2v20h2V18z"/>
+            </svg>
+            <p>Welcome to IntelliHelper, an advanced AI-powered assistant built to integrate intelligence into your everyday tasks. Developed by students of Ewing Christian College under the guidance of Mohammad Irshad, IntelliHelper is designed as a professional tool to serve diverse user needs while maintaining privacy, security, and user empowerment.</p>
+        </div>
+    
+        <!-- Mission Section -->
+        <div class="mission-section">
+            <h2>Our Mission</h2>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" class="section-image" fill="currentColor">
+                <path d="M32 4C17.664 4 6 15.664 6 30s11.664 26 26 26 26-11.664 26-26S46.336 4 32 4zm0 48c-12.064 0-22-9.936-22-22S19.936 8 32 8s22 9.936 22 22-9.936 22-22 22z"/>
+                <path d="M16 32l-6-6v12l6-6zm28 0l6-6v12l-6-6z"/>
+            </svg>
+            <p class="highlight">We aim to empower individuals and teams by providing innovative tools that make technology accessible and productive. Our focus is on simplifying complex processes and delivering intelligent assistance that benefits everyone. IntelliHelper is built to serve as a reliable companion, enhancing productivity and meeting a variety of user needs through advanced features.</p>
+        </div>
+    
+        <!-- Vision Section -->
+        <div class="vision-section">
+            <h2>Our Vision</h2>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" class="section-image" fill="currentColor">
+                <path d="M32 4C17.664 4 6 15.664 6 30s11.664 26 26 26 26-11.664 26-26S46.336 4 32 4zm0 48c-12.064 0-22-9.936-22-22S19.936 8 32 8s22 9.936 22 22-9.936 22-22 22z"/>
+                <path d="M24 28h16v8H24z"/>
+            </svg>
+            <p>IntelliHelper envisions a world where AI seamlessly integrates into daily life, empowering users to focus on their passions and priorities. Our vision is to provide intuitive, adaptable technology that bridges the gap between people and advanced tools. By designing user-centered features, we strive to bring innovative, impactful technology that improves the quality of life for everyone.</p>
+        </div>
+    
+        <!-- Team Section -->
+        <div class="team-section">
+            <h2>Our Team</h2>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" class="section-image" fill="currentColor">
+                <path d="M32 4C17.664 4 6 15.664 6 30s11.664 26 26 26 26-11.664 26-26S46.336 4 32 4zm0 48c-12.064 0-22-9.936-22-22S19.936 8 32 8s22 9.936 22 22-9.936 22-22 22z"/>
+                <path d="M22 26h4v4h-4zm16 0h4v4h-4z"/>
+            </svg>
+            <p>Our team is small yet driven, combining our skills and dedication to create a professional-grade AI assistant. With guidance and collaboration, we have crafted IntelliHelper to serve users effectively and reliably.</p>
+            <ul>
+                <li><strong>Mohammad Irshad</strong> - Guide</li>
+                <li><strong>Adeeb Mirza</strong> - Developer (ECC2214023)</li>
+                <li><strong>Anas Ahmad</strong> - Developer (ECC2214028)</li>
+            </ul>
+        </div>
+    
+        <!-- Features Section -->
+        <div class="features-section">
+            <h2>Why Choose IntelliHelper?</h2>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" class="section-image" fill="currentColor">
+                <path d="M32 4C17.664 4 6 15.664 6 30s11.664 26 26 26 26-11.664 26-26S46.336 4 32 4zm0 48c-12.064 0-22-9.936-22-22S19.936 8 32 8s22 9.936 22 22-9.936 22-22 22z"/>
+                <path d="M16 20l8 8-8 8zm32 0l-8 8 8 8z"/>
+            </svg>
+            <p>IntelliHelper is crafted to provide smart solutions for daily tasks with a user-centric approach. Leveraging advanced AI and machine learning, IntelliHelper offers:</p>
+            <ul>
+                <li><strong>Query Resolution</strong> - Accurate responses for specific and general inquiries.</li>
+                <li><strong>To-Do List Management</strong> - Prioritize tasks efficiently with our intuitive to-do interface.</li>
+                <li><strong>Notes Management</strong> - Create, edit, and categorize notes for better organization.</li>
+                <li><strong>Resume Score Detection</strong> - Receive feedback to improve your resume.</li>
+                <li><strong>Health Nutrients AI</strong> - Nutritional recommendations tailored to your goals.</li>
+                <li><strong>News Summarization</strong> - Get concise, meaningful summaries of news content.</li>
+            </ul>
+        </div>
+    
+        <!-- Values Section -->
+        <div class="values-section">
+            <h2>Our Values</h2>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" class="section-image" fill="currentColor">
+                <path d="M32 4C17.664 4 6 15.664 6 30s11.664 26 26 26 26-11.664 26-26S46.336 4 32 4zm0 48c-12.064 0-22-9.936-22-22S19.936 8 32 8s22 9.936 22 22-9.936 22-22 22z"/>
+                <path d="M22 28h4v8h-4zm16 0h4v8h-4z"/>
+            </svg>
+            <p>At IntelliHelper, we stand by our core values:</p>
+            <ul>
+                <li><strong>Integrity</strong> - Upholding honesty and transparency in all our interactions.</li>
+                <li><strong>Innovation</strong> - Constantly pushing the boundaries of technology to create impactful solutions.</li>
+                <li><strong>User-Centricity</strong> - Prioritizing the user experience in everything we design and build.</li>
+                <li><strong>Collaboration</strong> - Working together to share knowledge and achieve common goals.</li>
+                <li><strong>Responsibility</strong> - Committed to ethical practices and societal contributions.</li>
+            </ul>
+        </div>
+    
+        <!-- Contact Section -->
+        <div class="contact-section">
+            <h2>Get in Touch</h2>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" class="section-image" fill="currentColor">
+                <path d="M32 4C17.664 4 6 15.664 6 30s11.664 26 26 26 26-11.664 26-26S46.336 4 32 4zm0 48c-12.064 0-22-9.936-22-22S19.936 8 32 8s22 9.936 22 22-9.936 22-22 22z"/>
+                <path d="M18 24h28l-14 12z"/>
+            </svg>
+            <p>If you have any questions or would like to learn more about IntelliHelper, feel free to reach out to us!</p>
+            <p>Email: <a href="support@intellihelper.tech">support@intellihelper.tech</a></p>
+            <p style="text-align: center;"><a href="{{ url_for('about.Home') }}">Home</a></p>
+        </div>
+    </div>
+</body>
+
+</html>

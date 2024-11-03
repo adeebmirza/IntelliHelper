@@ -9,48 +9,49 @@
     <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/Intelli_Logo.png') }}">
     <!-- CSS Import -->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
+    <!-- Loader CSS and JS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/loader.css') }}">
+    <script src="{{ url_for('static', filename='js/loader.js') }}" defer></script>
     <!-- Importing Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Abel&display=swap" rel="stylesheet">
-    <!-- Fonts Import -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Abel&display=swap" rel="stylesheet">
-
-    <title>Login - IntelliHelper</title>
+    <title>Login - IntellHelper</title>
 </head>
 
 <body>
-    <div class="container">
-        <!-- Flash Message Section -->
-        {% with messages = get_flashed_messages(with_categories=true) %}
-            {% if messages %}
-                <div class="flash-messages">
-                    {% for category, message in messages %}
-                        <div class="alert {{ category }}">
-                            {{ message }}
-                            <span class="close-btn" onclick="this.parentElement.style.display='none';">&times;</span>
-                        </div>
-                    {% endfor %}
-                </div>
-            {% endif %}
-        {% endwith %}
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+    {% for category, message in messages %}
+    <script>
+        alert("{{ message }}");
+    </script>
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
 
+    <div id="loader" class="loader">
+        <img src="{{ url_for('static', filename='images/Giffy-Loader.gif') }}" alt="Loading..." class="loader-gif">
+    </div>
+
+    <div class="container">
         <div class="login-section">
             <h2>Login</h2>
             <form method="POST">
                 {{ form.hidden_tag() }}
                 <div class="input-group">
                     {{ form.username.label }}
-                    {{ form.username(autocomplete="off", oninvalid="this.setCustomValidity('Please enter your name')", oninput="setCustomValidity('')") }}
+                    {{ form.username(autocomplete="off", oninvalid="this.setCustomValidity('Please enter your name')",
+                    oninput="setCustomValidity('')") }}
                 </div>
                 <div class="input-group password-container">
                     {{ form.password.label }}
                     {{ form.password() }}
                     <span class="eye-icon" id="eyeIcon" onclick="togglePassword()">
-                        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#337ab7">
-                            <path d="M480-320q75 0 127.5-52.5T660-500q0-75-52.5-127.5T480-680q-75 0-127.5 52.5T300-500q0 75 52.5 127.5T480-320Zm0-72q-45 0-76.5-31.5T372-500q0-45 31.5-76.5T480-608q45 0 76.5 31.5T588-500q0 45-31.5 76.5T480-392Zm0 192q-146 0-266-81.5T40-500q54-137 174-218.5T480-800q146 0 266 81.5T920-500q-54 137-174 218.5T480-200Zm0-300Zm0 220q113 0 207.5-59.5T832-500q-50-101-144.5-160.5T480-720q-113 0-207.5 59.5T128-500q50 101 144.5 160.5T480-280Z"/>
+                        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
+                            fill="#337ab7">
+                            <path
+                                d="M480-320q75 0 127.5-52.5T660-500q0-75-52.5-127.5T480-680q-75 0-127.5 52.5T300-500q0 75 52.5 127.5T480-320Zm0-72q-45 0-76.5-31.5T372-500q0-45 31.5-76.5T480-608q45 0 76.5 31.5T588-500q0 45-31.5 76.5T480-392Zm0 192q-146 0-266-81.5T40-500q54-137 174-218.5T480-800q146 0 266 81.5T920-500q-54 137-174 218.5T480-200Zm0-300Zm0 220q113 0 207.5-59.5T832-500q-50-101-144.5-160.5T480-720q-113 0-207.5 59.5T128-500q50 101 144.5 160.5T480-280Z" />
                         </svg>
                     </span>
                 </div>
@@ -64,18 +65,41 @@
         </div>
 
         <div class="signup-section">
-            <h2>Not a Member yet? Join IntelliHelper Today!</h2>
+            <h2>Not a Member yet? Join IntellHelper Today!</h2>
             <p>Ready to be part of something smarter? Click below and get started!</p>
             <a href="{{ url_for('auth.signup') }}" class="join-now-btn">Join Now</a>
         </div>
     </div>
 
     <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const passwordInput = document.querySelector('input[name="password"]');
+            const eyeIcon = document.getElementById('eyeIcon');
+
+            passwordInput.addEventListener('focus', function () {
+                eyeIcon.style.display = 'block';
+            });
+
+            passwordInput.addEventListener('blur', function () {
+                if (passwordInput.value.length === 0) {
+                    eyeIcon.style.display = 'none';
+                }
+            });
+
+            passwordInput.addEventListener('input', function () {
+                if (passwordInput.value.length > 0) {
+                    eyeIcon.style.display = 'block';
+                } else {
+                    eyeIcon.style.display = 'none';
+                }
+            });
+        });
+
         function togglePassword() {
             const passwordInput = document.querySelector('input[name="password"]');
             const eyeIcon = document.getElementById('eyeIcon');
 
-            const eyeOpenSvg = `<svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="24px" fill="#337ab7"><path d="m644-428-58-58q9-47-27-88t-93-32l-58-58q17-8 34.5-12t37.5-4q75 0 127.5 52.5T660-500q0 20-4 37.5T644-428Zm128 126-58-56q38-29 67.5-63.5T832-500q-50-101-144.5-160.5T480-720q-29 0-57 4t-55 12l-62-62q41-17 84-25.5t90-8.5q151 0 269 83.5T920-500q-23 59-60.5 109.5T772-302Zm20 246L624-222q-35 11-70.5 16.5T480-200q-151 0-269-83.5T40-500q21-53 53-98.5t73-81.5L56-792l56-56 736 736-56 56ZM222-624q-29 26-53 57t-53 57Zm-31 23Zm0-248Zm0 75Z"/></svg>`;
+            const eyeOpenSvg = `<svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="24px" fill="#337ab7"><path d="m644-428-58-58q9-47-27-88t-93-32l-58-58q17-8 34.5-12t37.5-4q75 0 127.5 52.5T660-500q0 20-4 37.5T644-428Zm128 126-58-56q38-29 67.5-63.5T832-500q-50-101-143.5-160.5T480-720q-29 0-57 4t-55 12l-62-62q41-17 84-25.5t90-8.5q151 0 269 83.5T920-500q-23 59-60.5 109.5T772-302Zm20 246L624-222q-35 11-70.5 16.5T480-200q-151 0-269-83.5T40-500q21-53 53-98.5t73-81.5L56-792l56-56 736 736-56 56ZM222-624q-29 26-53 57t-53 57Zm-31 23Zm0-248Zm0 75Z"/></svg>`;
 
             const eyeSvg = `<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#337ab7"><path d="M480-320q75 0 127.5-52.5T660-500q0-75-52.5-127.5T480-680q-75 0-127.5 52.5T300-500q0 75 52.5 127.5T480-320Zm0-72q-45 0-76.5-31.5T372-500q0-45 31.5-76.5T480-608q45 0 76.5 31.5T588-500q0 45-31.5 76.5T480-392Zm0 192q-146 0-266-81.5T40-500q54-137 174-218.5T480-800q146 0 266 81.5T920-500q-54 137-174 218.5T480-200Zm0-300Zm0 220q113 0 207.5-59.5T832-500q-50-101-144.5-160.5T480-720q-113 0-207.5 59.5T128-500q50 101 144.5 160.5T480-280Z"/></svg>`;
 
@@ -87,7 +111,9 @@
                 eyeIcon.innerHTML = eyeSvg;
             }
         }
+
     </script>
+
 </body>
 
 </html>

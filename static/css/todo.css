@@ -1,0 +1,274 @@
+/* Body Reset */
+body {
+    font-family: 'Abel', sans-serif;
+    background-color: #CDE8E5;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* Container Styles */
+.container {
+    width: 95vw;
+    height: 95vh;
+    background: #a1b1af;
+    display: flex;
+     /* Allow wrap on smaller screens */
+    border-radius: 10px;
+    align-items: center;
+    justify-content: space-around;
+    gap: 10px;
+    padding: 10px;
+}
+
+/* Row Container Styles */
+.row-container {
+    background-color: #ffffff;
+    width: 20%;
+    height: 95%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    text-align: center;
+    padding: 15px;
+}
+
+.row-container h1 {
+    font-size: 1.8rem;
+    text-align: center;
+    padding-bottom: 6px;
+    border-bottom: 1px solid black;
+    margin-bottom: 0px;
+}
+
+.row-container-2 {
+    width: 76%;
+    max-width: 1400px;
+    background-color: #D9D9D9;
+    height: 95%;
+    overflow-y: auto;
+    border-radius: 10px;
+    padding: 15px;
+}
+
+/* Task Title */
+.task-title {
+    margin-top: 0;
+}
+
+/* Task List Styles */
+.task-list {
+    list-style: none;
+    padding: 0;
+}
+
+.task-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    background-color: #f9f9f9;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.task-item:hover {
+    background-color: #d4e3e1;
+}
+
+/* Task Info Styles */
+.task-info {
+    flex-grow: 1;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    white-space: normal;
+    max-width: 75%;
+}
+
+/* Button Styles */
+.btn-edit, .btn-complete, .btn-delete {
+    padding: 5px 10px;
+    border-radius: 5px;
+    text-decoration: none;
+    color: white;
+}
+
+.btn-edit {
+    background-color: #2196F3;
+}
+
+.btn-edit:hover {
+    background-color: #1e88e5;
+}
+
+.btn-complete {
+    background-color: #4CAF50;
+}
+
+.btn-complete:hover {
+    background-color: #43a047;
+}
+
+.btn-delete {
+    background-color: #f44336;
+}
+
+.btn-delete:hover {
+    background-color: #d32f2f;
+}
+
+.filter-group {
+    text-align: center;
+    font-size: 1.2rem;
+    border-bottom: 1px solid black;
+    padding-bottom: 5px;
+    padding-top: 5px;
+    display: flex;
+    flex-direction: column;
+}
+
+.filter-group label {
+    margin-right: 10px;
+    margin-left: 10px;
+}
+
+.filter-group select {
+    all: unset;
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid #ffffff;
+    background-color: #337ab7;
+    color: white;
+}
+
+.filter-group select:hover {
+    color: #337ab7;
+    border: 1px solid #337ab7;
+    background-color: white;
+}
+
+/* Task Group Section */
+.grps {
+    margin-top: 10px;
+    text-align: center;
+    height: 55%;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    white-space: normal;
+    overflow-x: auto;
+}
+
+.row-container h3 {
+    font-size: 1.4rem;
+    color: #333;
+    font-weight: bold;
+    margin-bottom: 0px;
+}
+
+.grps option {
+    font-size: 1.2rem;
+}
+
+/* Task Add Button */
+.task-add {
+    text-align: center;
+    margin: 15px 0;
+}
+
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    border: 1px solid #ffffff;
+    background-color: #337ab7;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 1rem;
+}
+
+.btn:hover {
+    color: #337ab7;
+    border: 1px solid #337ab7;
+    background-color: white;
+}
+
+/* Loader */
+.loader {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(255, 255, 255, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+.loader-gif {
+    width: 80px;
+}
+
+/* Hide loader after content loads */
+#loader {
+    display: none;
+}
+
+/* Responsive Design Adjustments */
+@media (min-width: 768px) and (max-width: 1080px) {
+    .btn {
+        font-size: 0.9rem;
+        padding: 8px 14px; /* Adjust padding as needed */
+    }
+}
+
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+        width: 100vw;
+        height: auto;
+        padding: 20px;
+        margin-top: auto;
+    }
+
+    .row-container, .row-container-2 {
+        width: 90%;
+        margin-bottom: 20px;
+    }
+
+    .task-title {
+        font-size: 1.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 15px;
+    }
+
+    .row-container h1 {
+        font-size: 1.6rem;
+    }
+
+    .task-title {
+        font-size: 1.3rem;
+    }
+
+    .btn, .btn-edit, .btn-complete, .btn-delete {
+        font-size: 0.9rem;
+        padding: 8px 12px;
+    }
+
+    .task-info strong {
+        font-size: 1rem;
+    }
+
+    .task-actions a {
+        padding: 5px 8px;
+        font-size: 0.8rem;
+    }
+
+    .task-item {
+        padding: 10px;
+    }
+}

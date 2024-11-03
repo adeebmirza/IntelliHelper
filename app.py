@@ -8,8 +8,10 @@ from src.routes.todo import todo
 from src.routes.news import news_bp
 from src.routes.new_summ import text_summarzize
 from src.routes.medical_bot import bot_bp
+from src.routes.notes import notes
 from flask_session import Session
 from flask import Flask, session
+from src.routes.about import about_bp
 
 app = Flask(__name__)
 app.config['SESSION_TYPE'] = 'filesystem'  # Use filesystem or another server-side option
@@ -29,6 +31,8 @@ app.register_blueprint(todo)
 app.register_blueprint(news_bp)
 app.register_blueprint(text_summarzize)
 app.register_blueprint(bot_bp)
+app.register_blueprint(notes)
+app.register_blueprint(about_bp)
 
 if __name__ == '__main__':
     app.run(debug=True)

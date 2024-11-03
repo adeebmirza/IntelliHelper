@@ -15,7 +15,7 @@ def send_email(sender_email,receiver_email,subject,body,password):
     message.attach(MIMEText(body, 'plain'))
 
     try:
-        server = smtplib.SMTP("smtp.gmail.com",587)
+        server = smtplib.SMTP("smtp.zoho.in",587)
         server.starttls()
         server.login(sender_email,password)
         text = message.as_string()

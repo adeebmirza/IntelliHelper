@@ -2,40 +2,81 @@
 <html lang="en">
 
 <head>
+    <!-- Meta for Responsive Design -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Fav_Icon -->
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/Intelli_Logo.png') }}">
+    <!-- CSS Import -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/todo.css') }}">
+    <!-- Loader CSS and JS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/loader.css') }}">
+    <script src="{{ url_for('static', filename='js/loader.js') }}" defer></script>
+    <!-- Fonts Import -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Abel&display=swap" rel="stylesheet">
     <title>To-Do List</title>
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 
-<body class="bg-light">
-    <div class="container mt-5">
-        <h1 class="text-center mb-4">My To-Do List</h1>
-        
-        <div class="d-flex justify-content-between mb-3">
-            <h2>Tasks</h2>
-            <a href="{{ url_for('todo_app.add_task') }}" class="btn btn-primary">Add New Task</a>
-        </div>
-
-        <ul class="list-group">
-            {% for task in tasks %}
-            <li class="list-group-item d-flex justify-content-between align-items-center">
-                <span>
-                    <strong>{{ task['task'] }}</strong> - <span class="text-muted">{{ task['status'] }}</span>
-                </span>
-                <div>
-                    <a href="{{ url_for('todo_app.edit_task', task_id=task['_id']) }}" class="btn btn-warning btn-sm">Edit</a>
-                    <a href="{{ url_for('todo_app.complete_task', task_id=task['_id']) }}" class="btn btn-success btn-sm">Complete</a>
-                    <a href="{{ url_for('todo_app.delete_task', task_id=task['_id']) }}" class="btn btn-danger btn-sm">Delete</a>
-                </div>
-            </li>
-            {% endfor %}
-        </ul>
+<body>
+    <div id="loader" class="loader">
+        <img src="{{ url_for('static', filename='images/Giffy-Loader.gif') }}" alt="Loading..." class="loader-gif">
     </div>
 
-    <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <div class="container">
+        <div class="row-container">
+            <h1 class="first">My To-Do List</h1>
+            
+            <h3>Task Groups</h3>
+            <div class="filter-group">
+                <label for="groupFilter" class="form-label">Filter by Group:</label>
+                <select id="groupFilter" onchange="location = this.value;">
+                    <option value="{{ url_for('todo_app.index') }}">All Groups</option>
+                    {% for group in groups %}
+                    <option value="{{ url_for('todo_app.index', group=group) }}" {% if group == selected_group %}selected{% endif %}>
+                        {{ group }}
+                    </option>
+                    {% endfor %}
+                </select>
+            </div>
+            
+            <div class="grps">
+                {% for group in groups %}
+                <option value="{{ url_for('todo_app.index', group=group) }}" {% if group == selected_group %}selected{% endif %}>
+                    {{ group }}
+                </option>
+                {% endfor %}
+            </div>
+
+            <div class="task-add">
+                <a href="{{ url_for('todo_app.add_task') }}" class="btn">Add New Task</a>
+                <a href="{{ url_for('about.Home') }}" class="btn">Home Page</a>
+            </div>
+        </div>
+
+        <div class="row-container-2">
+            <h2 class="task-title">Tasks</h2>
+            <ul class="task-list">
+                {% for task in tasks %}
+                <li class="task-item">
+                    <span class="task-info">
+                        <strong>{{ task['task'] }}</strong> - 
+                        <span class="status">{{ task['status'] }}</span> - 
+                        <span class="group">{{ task['group'] }}</span>
+                    </span>
+                    <div class="task-actions">
+                        <a href="{{ url_for('todo_app.edit_task', task_id=task['_id']) }}" class="btn-edit">Edit</a>
+                        {% if task['status'] != 'completed' %}
+                            <a href="{{ url_for('todo_app.complete_task', task_id=task['_id']) }}" class="btn-complete">Complete</a>
+                        {% endif %}
+                        <a href="{{ url_for('todo_app.delete_task', task_id=task['_id']) }}" class="btn-delete">Delete</a>
+                    </div>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
 </body>
 
 </html>

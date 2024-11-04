@@ -82,23 +82,6 @@
         </div>
     </div>
 
-    <div class="health_bot">
-        <input onclick="togglebot()" type="text" placeholder="Enter your Symptoms or Health Concerns..." readonly>
-    </div>
-
-    <div class="health_bot_tab">
-        <button onclick="togglebot()" class="close-btn">Close</button>
-        <div class="chat_area">
-            <div id="messageArea" class="message-area"></div>
-        </div>
-
-        <div class="hbt_text">
-            <form id="chatForm">
-                <input type="text" id="text" placeholder="Type your message..." autocomplete="off" required>
-                <button type="submit"><i class="fas fa-location-arrow"></i> Send</button>
-            </form>
-        </div>
-    </div>
 
 
     </div>
@@ -110,7 +93,7 @@
             <li><a href="{{ url_for('todo_app.index') }}" title="To-Do List" target="_blank">📝</a></li>
             <li><a href="{{ url_for('news.index') }}" title="News" target="_blank">📰</a></li>
             <li><a href="{{ url_for('text.index') }}" title="News Summary" target="_blank">📋</a></li>
-            <li><a href="{{ url_for('text.index') }}" title="Notes" target="_blank">&#128466</a></li>
+            <li><a href="{{ url_for('notes_app.all_notes') }}" title="Notes" target="_blank">&#128466</a></li>
         </ul>
     </div>
 

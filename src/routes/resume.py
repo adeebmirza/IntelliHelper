@@ -13,16 +13,17 @@ def index():
         ats_score = calculate_ats_score(resume_text, job_description)
         
         return render_template('resume.html', score=ats_score)
-    
-    if 'user' not in session:
-        return redirect(url_for('auth.login'))
-    
-    user_id = session['user']['_id']
-    user_data = get_user_by_id(user_id)
-    
-    if user_data is None:
-        return "User not found", 404
+    user = session.get('user')
+    if user:
+        user_id = user['_id']
+        user_data = get_user_by_id(user_id)
 
-    display_data = {'profile_pic': user_data.get('profile_pic')}
+        if user_data is None:
+            return "User not found", 404
+
+        display_data = {'profile_pic': user_data.get('profile_pic')}
+    else:
+        # Use default data if user is not in session
+        display_data = {'profile_pic': 'default_profile_pic.jpg'}
     
     return render_template('resume.html', score=None,display_data=display_data)

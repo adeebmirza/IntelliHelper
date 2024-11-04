@@ -58,6 +58,16 @@
                     {{ form.email.label }}
                     {{ form.email(oninvalid="this.setCustomValidity('Please enter a valid email')", oninput="setCustomValidity('')") }}
                 </div>
+                <div class="input-group">
+                    {{ form.dob.label }}
+                    {{ form.dob(type="date", oninvalid="this.setCustomValidity('Please enter a valid date')", oninput="setCustomValidity('')") }}
+                </div>
+                
+                <div class="input-group">
+                    {{ form.gender.label }}
+                    {{ form.gender(class="form-control") }}
+                </div>
+                
                 
                 <div class="input-group password-container">
                     {{ form.password.label }}

@@ -44,15 +44,18 @@ qa = RetrievalQA.from_chain_type(
 
 @bot_bp.route("/chat")
 def index():
-    user_id = session.get('user', {}).get('_id')  # Access user ID from the session
-    if not user_id:
-        return redirect(url_for('auth.login'))  # Redirect if not logged in
-    
-    user_data = get_user_by_id(user_id)  # Retrieve user data from the database
-    display_data = {
-        'profile_pic': user_data.get('profile_pic'),
-        'name': user_data.get('name')
-    }
+    user = session.get('user')
+    if user:
+        user_id = user['_id']
+        user_data = get_user_by_id(user_id)
+
+        if user_data is None:
+            return "User not found", 404
+
+        display_data = {'profile_pic': user_data.get('profile_pic')}
+    else:
+        # Use default data if user is not in session
+        display_data = {'profile_pic': 'default_profile_pic.jpg'}
 
     return render_template('chat.html', display_data=display_data)  # Pass user data to the template
 

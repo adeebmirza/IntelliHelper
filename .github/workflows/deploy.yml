@@ -27,13 +27,10 @@ jobs:
                 AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
                 AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
                 AWS_REGION: ${{ secrets.AWS_REGION }}
-                BING_API_KEY: ${{ secrets.BING_API_KEY }}
+                BING_API_KEY: ${{ secrets.BING_API_KEY }}r
                 GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
                 PINECONE_API_ENV: ${{ secrets.PINECONE_API_ENV }}
                 PINECONE_API_KEY: ${{ secrets.PINECONE_API_KEY }}
                 SENDER_EMAIL: ${{ secrets.SENDER_EMAIL }}
                 SENDER_PASSWORD: ${{ secrets.SENDER_PASSWORD }}
-              run: |
-                # Add any specific commands to deploy to AWS
-                # For example, if using Flask with Gunicorn:
-                pm2 restart app.py --interpreter python3
+              run: python3 app.py

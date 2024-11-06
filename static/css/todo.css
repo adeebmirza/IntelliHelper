@@ -218,7 +218,7 @@ body {
 @media (min-width: 768px) and (max-width: 1080px) {
     .btn {
         font-size: 0.9rem;
-        padding: 8px 14px; /* Adjust padding as needed */
+        padding: 8px 14px;
     }
 }
 

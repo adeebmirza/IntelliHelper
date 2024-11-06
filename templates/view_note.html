@@ -1,51 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Meta for Responsive Design -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ note_title }}</title>
-    <style>
-        .container {
-            width: 98%;
-            margin: 0 auto;
-            padding: 20px;
-        }
-        h1 {
-            text-align: center;
-            margin-bottom: 20px;
-        }
-        .note-box {
-            width: 96.5%;
-            max-height: 75vh;
-            overflow-y: auto;
-            border: 2px solid #ccc;
-            border-radius: 8px;
-            background-color: #f9f9f9;
-            padding: 20px;
-            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-        }
-        .action-buttons {
-            text-align: center;
-            margin-top: 20px;
-        }
-        .button {
-            padding: 10px 20px;
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            font-size: 16px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-            margin: 5px;
-            text-decoration: none;
-        }
-        .button:hover {
-            background-color: #45a049;
-        }
-    </style>
+    <!-- Fav_Icon -->
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/Intelli_Logo.png') }}">
+    <!-- CSS Import -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/view.css') }}">
+    <!-- Loader CSS and JS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/loader.css') }}">
+    <script src="{{ url_for('static', filename='js/loader.js') }}" defer></script>
+    <!-- Fonts Import -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Abel&display=swap" rel="stylesheet">
+    <title>IntelliHelper - {{ note_title }}</title>
 </head>
 <body>
+
+    <div id="loader" class="loader">
+        <img src="{{ url_for('static', filename='images/Giffy-Loader.gif') }}" alt="Loading..." class="loader-gif">
+    </div>
+
+    <div class="shape shape1"></div>
+    <div class="shape shape2"></div>
+    <div class="shape shape3"></div>
+    <div class="shape shape4"></div>
+
     <div class="container">
         <h1>{{ note_title }}</h1>
         <div class="note-box">
@@ -54,7 +36,6 @@
             </div>
         </div>
         <div class="action-buttons">
-            
             <a href="javascript:window.history.back();" class="button">Back to Notes</a>
             <a href="{{ url_for('notes_app.download_note', note_id=note_id) }}" class="button">Download Note</a>
         </div>

@@ -185,16 +185,19 @@ body {
     border-right: 2px solid black;
     cursor: default;
     min-width: 12%;
+    max-height: 5vh;
 }
 
 .nav_links{
     min-width: 20%;
+    max-height: 5vh;
 }
 
 .nav_links ul{
     display: flex;
     list-style: none;
     justify-content: space-around;
+    margin: 0;
 }
 
 .nav_links li {
@@ -216,12 +219,12 @@ body {
 }
 
 .dropdown-menu {
-    position: absolute; /* Position relative to the button */
+    position: absolute;
     backdrop-filter: blur(5px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Shadow for depth */
-    border-radius: 8px; /* Rounded corners */
-    z-index: 1000; /* Ensure it's above other elements */
-    display: none; /* Start hidden */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    z-index: 1000;
+    display: none;
     border-left: 5px solid black;
     font-size: 1.2rem;
     margin-top: 5px;
@@ -229,26 +232,26 @@ body {
 
 .dropdown-menu ul {
     display: flex;
-    list-style-type: none; /* Remove default bullet points */
-    padding: 0; /* Remove padding */
-    margin: 0; /* Remove margin */
+    list-style-type: none;
+    padding: 0; 
+    margin: 0;
     flex-direction: column;
 }
 
 .dropdown-menu li {
-    margin: 0; /* Remove margin */
+    margin: 0;
 }
 
 .dropdown-menu li a {
-    text-decoration: none; /* Remove underline from links */
-    color: black; /* Text color */
-    padding: 10px; /* Padding around links for spacing */
-    display: block; /* Makes the entire area clickable */
+    text-decoration: none; 
+    color: black; 
+    padding: 10px;
+    display: block;
     border-radius: 8px;
 }
 
 .dropdown-menu li a:hover {
-    background-color: #f0f0f0; /* Highlight on hover */
+    background-color: #f0f0f0; 
 }
 
 
@@ -294,10 +297,10 @@ a{
 }
 
 .profile-pic {
-    width: 35px; /* Adjust as necessary */
-    height: 35px; /* Adjust as necessary */
-    border-radius: 50%; /* For a circular image */
-    cursor: pointer; /* Change cursor to pointer on hover */
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    cursor: pointer;
     border: 1px solid black;
 }
 
@@ -337,11 +340,11 @@ textarea {
 
 textarea:hover,
 textarea:focus {
-    border: 1px solid #7f8c8d;
+    border: 1px solid #007bff;
 }
 
 button {
-    width: 80%; /* Adjust this as needed */
+    width: 80%;
     padding: 12px;
     font-size: 16px;
     background-color: #007bff;
@@ -350,7 +353,7 @@ button {
     border-radius: 4px;
     cursor: pointer;
     display: block;
-    margin: 0 auto; /* Center the button horizontally */
+    margin: 0 auto;
 }
 
 button:hover {
@@ -428,11 +431,18 @@ button:hover {
     .navBar {
         flex-direction: column;
         align-items: center;
+        height: 40vh;
+    }
+
+    .nav_links{
+        max-height: 15vh;
     }
 
     .nav_links ul {
         flex-direction: column;
         align-items: center;
+        margin: initial;
+        width: initial;
         padding: unset;
     }
 

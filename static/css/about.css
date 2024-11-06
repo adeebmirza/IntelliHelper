@@ -71,17 +71,18 @@ body::-webkit-scrollbar-thumb {
 
 .title-section, .vision-section, .features-section{
     position: relative;
-    left: 13%;
+    left: 6%;
 }
 
 .mission-section, .team-section, .values-section{
     position: relative;
-    right: 13%;
+    right: 6%;
     transform: skew(1deg, 1deg);
 }
 
 .contact-section{
     transform: skew(0deg, 0deg);
+    text-align: center;
 }
 
 @keyframes tilt {
@@ -223,12 +224,12 @@ p, li {
 }
 
 .section-image {
-    width: 30%;
-    max-width: 800px; /* Adjust based on your layout */
+    width: 15%;
+    max-width: 800px;
     height: auto;
-    margin: 20px auto; /* Center the image */
-    display: block; /* Ensure images are displayed as block elements */
-    border-radius: 8px; /* Optional: rounded corners */
+    margin: 20px auto;
+    display: block;
+    border-radius: 8px;
 }
 
 .h1-main{

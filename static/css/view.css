@@ -1,0 +1,136 @@
+/* Background Styling */
+body {
+    font-family: 'Abel', sans-serif;
+    background: linear-gradient(135deg, #f4f7f6, #d6e6f2, #c9e0f2, #b7d5f2);
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+/* Floating Shapes */
+.shape {
+    position: absolute;
+    opacity: 0.15;
+    animation: chaos 10s ease-in-out infinite;
+    mix-blend-mode: multiply;
+    z-index: -1;
+}
+
+.shape1 {
+    width: 150px;
+    height: 150px;
+    top: 10%;
+    left: 15%;
+    background: radial-gradient(circle, #ff9a9e, #fad0c4);
+    border-radius: 50%;
+    animation-duration: 14s;
+}
+
+.shape2 {
+    width: 180px;
+    height: 180px;
+    top: 50%;
+    left: 60%;
+    background: radial-gradient(circle, #a1c4fd, #c2e9fb);
+    border-radius: 50%;
+    animation-duration: 12s;
+}
+
+.shape3 {
+    width: 120px;
+    height: 120px;
+    bottom: 20%;
+    right: 20%;
+    background: linear-gradient(135deg, #fbc2eb, #a6c1ee);
+    clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+    animation-duration: 18s;
+}
+
+.shape4 {
+    width: 90px;
+    height: 90px;
+    bottom: 10%;
+    left: 25%;
+    background: radial-gradient(circle, #f6d365, #fda085);
+    border-radius: 50%;
+    animation-duration: 15s;
+}
+
+/* Animation for Chaos */
+@keyframes chaos {
+    0% {
+        transform: translateY(0px) translateX(0px) rotate(0deg);
+    }
+
+    50% {
+        transform: translateY(-30px) translateX(20px) rotate(45deg);
+    }
+
+    100% {
+        transform: translateY(0px) translateX(0px) rotate(0deg);
+    }
+}
+
+/* Container Styles */
+.container {
+    width: 95%;
+    max-width: 750px;
+    background-color: rgba(255, 255, 255, 0.85);
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    backdrop-filter: blur(5px);
+}
+
+/* Heading Styles */
+h1 {
+    text-align: center;
+    color: #333;
+    font-size: 1.8em;
+    background: black;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* Note Box Styles */
+.note-box {
+    width: 100%;
+    background-color: #fafafa;
+    padding: 15px;
+    border-radius: 8px;
+    font-size: 1rem;
+    color: #333;
+    word-wrap: break-word;
+    white-space: pre-wrap;
+    border: 1px solid #ddd;
+}
+
+/* Button Styles */
+.action-buttons {
+    display: flex;
+    gap: 15px;
+    margin-top: 15px;
+}
+
+.button {
+    padding: 12px 24px;
+    border: 1px solid #007bff;
+    border-radius: 8px;
+    background-color: #007bff;
+    color: white;
+    text-decoration: none;
+    font-size: 1em;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.button:hover {
+    background-color: white;
+    color: #007bff;
+    border: 1px solid #007bff;
+}

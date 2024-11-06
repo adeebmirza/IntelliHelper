@@ -60,12 +60,12 @@
         // Input masking for OTP
         const otpInput = document.getElementById('otp');
         otpInput.addEventListener('input', function () {
-            otpInput.value = otpInput.value.replace(/[^0-9]/g, '').slice(0, 6); // Limit to 6 digits
+            otpInput.value = otpInput.value.replace(/[^0-9]/g, '').slice(0, 6);
         });
 
         // Countdown timer for OTP expiry (10 minutes = 600 seconds)
         const countdownElement = document.getElementById('countdown');
-        let timeLeft = 600; // 10 minutes in seconds
+        let timeLeft = 600;
 
         const timer = setInterval(function () {
             let minutes = Math.floor(timeLeft / 60);

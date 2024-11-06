@@ -1,9 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Meta for Responsive Design -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ note_title }}</title>
+    <!-- Fav_Icon -->
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/Intelli_Logo.png') }}">
+    <!-- Loader CSS and JS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/loader.css') }}">
+    <script src="{{ url_for('static', filename='js/loader.js') }}" defer></script>
+    <!-- Fonts Import -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Abel&display=swap" rel="stylesheet">
+    <title>IntelliHelper - {{ note_title }}</title>
     <style>
         .container {
             width: 98%;
@@ -46,6 +56,11 @@
     </style>
 </head>
 <body>
+
+    <div id="loader" class="loader">
+        <img src="{{ url_for('static', filename='images/Giffy-Loader.gif') }}" alt="Loading..." class="loader-gif">
+    </div>
+
     <div class="container">
         <h1>{{ note_title }}</h1>
         <div class="note-box">
@@ -55,7 +70,7 @@
         </div>
         <div class="action-buttons">
             <a href="javascript:window.history.back();" class="button">Back to Notes</a>
-            <a href="{{ url_for('download_note', note_id=note_id) }}" class="button">Download Note</a>
+            <a href="{{ url_for('notes_app.download_note', note_id=note_id) }}" class="button">Download Note</a>
         </div>
     </div>    
 </body>

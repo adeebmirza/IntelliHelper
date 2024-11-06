@@ -1,369 +1,344 @@
-/* General Styles */
 body {
-	font-family: 'Abel', sans-serif;
-	/* background-color: #e3eff4; */
-	background: -webkit-linear-gradient(to right, rgb(40, 59, 34), rgb(54, 60, 70), rgb(32, 32, 43));
-	background: linear-gradient(to right, rgb(38, 51, 61), rgb(50, 55, 65), rgb(33, 33, 78));
-	color: #333;
-	margin: 0;
-	padding: 0;
-	max-height: 100vh;
+    font-family: 'Abel', sans-serif;
+    background: -webkit-linear-gradient(to right, rgb(40, 59, 34), rgb(54, 60, 70), rgb(32, 32, 43));
+    background: linear-gradient(to right, rgb(38, 51, 61), rgb(50, 55, 65), rgb(33, 33, 78));
+    color: #333;
+    margin: 0;
+    padding: 0;
+    max-height: 100vh;
 }
 
-
-/* Navbar Design */
 .navBar {
-	display: flex;
-	color: white;
-	justify-content: space-around;
-	align-items: center;
-	font-size: 1.4rem;
-	margin-top: 1%;
-	height: 5vh;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    font-size: 1.4rem;
+    margin-top: 1%;
+    color: white;
 }
 
 .logo {
-	border-right: 2px solid rgb(255, 255, 255);
-	cursor: default;
-	min-width: 10%;
-	max-height: 5vh;
+    border-right: 2px solid rgb(255, 255, 255);
+    cursor: default;
+    min-width: 12%;
+    max-height: 5vh;
 }
 
 .nav_links {
-	min-width: 20%;
+    min-width: 20%;
+    max-height: 5vh;
 }
 
 .nav_links ul {
-	display: flex;
-	list-style: none;
-	justify-content: space-around;
+    display: flex;
+    list-style: none;
+    justify-content: space-around;
+    margin: 0;
 }
 
 .nav_links li {
-	border-bottom: 2px solid transparent;
-	padding-bottom: 2px;
-	padding-left: 7px;
-	padding-right: 7px;
-	color: white;
+    border-bottom: 2px solid transparent;
+    padding-bottom: 2px;
+    padding-left: 7px;
+    padding-right: 7px;
 }
 
-.nav_links a:hover,
-.nav_links button:hover {
-	border-bottom: 2px solid rgb(255, 255, 255);
+.nav_links a:hover, .nav_links button:hover {
+    border-bottom: 2px solid rgb(255, 255, 255);
+    background-color: inherit;
 }
 
 .nav_links button {
-	all: unset;
-	cursor: pointer;
-	border-bottom: 2px solid transparent;
+    all: unset;
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
 }
 
 .dropdown-menu {
-	position: absolute;
-	/* Position relative to the button */
-	backdrop-filter: blur(5px);
-	box-shadow: 0 4px 8px rgba(255, 255, 255, 0.2);
-	/* Shadow for depth */
-	border-radius: 8px;
-	/* Rounded corners */
-	z-index: 1000;
-	/* Ensure it's above other elements */
-	display: none;
-	/* Start hidden */
-	border-left: 5px solid rgb(255, 255, 255);
-	font-size: 1.2rem;
-	margin-top: 5px;
+    position: absolute;
+    backdrop-filter: blur(5px);
+    box-shadow: 0 4px 8px rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    z-index: 1000;
+    display: none;
+    border-left: 5px solid rgb(255, 255, 255);
+    font-size: 1.2rem;
+    margin-top: 5px;
 }
 
 .dropdown-menu ul {
-	display: flex;
-	list-style-type: none;
-	/* Remove default bullet points */
-	padding: 0;
-	/* Remove padding */
-	margin: 0;
-	/* Remove margin */
-	flex-direction: column;
+    display: flex;
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    flex-direction: column;
 }
 
 .dropdown-menu li {
-	margin: 0;
-	/* Remove margin */
+    margin: 0;
 }
 
 .dropdown-menu li a {
-	text-decoration: none;
-	/* Remove underline from links */
-	color: rgb(255, 255, 255);
-	/* Text color */
-	padding: 10px;
-	/* Padding around links for spacing */
-	display: block;
-	/* Makes the entire area clickable */
-	border-radius: 8px;
+    text-decoration: none;
+    color: rgb(255, 255, 255);
+    padding: 10px;
+    display: block;
+    border-radius: 8px;
+    color: white;
 }
 
 .dropdown-menu li a:hover {
-	background-color: #f0f0f0;
-	/* Highlight on hover */
+    background-color: #f0f0f0;
 }
-
 
 .joining {
-	display: flex;
-	justify-content: space-around;
-	border-left: 2px solid rgb(255, 255, 255);
-	min-width: 10%;
-	max-height: 5vh;
+    display: flex;
+    justify-content: space-around;
+    border-left: 2px solid rgb(255, 255, 255);
+    min-width: 12%;
 }
 
-.l_btn a,
-.s_btn :hover {
-	background-color: black;
-	color: white;
-	margin: 6px;
-	border-radius: 40px;
-	padding: 7px;
-	padding-left: 9px;
-	padding-right: 9px;
-	transition: background-color 0.3s, color 0.3s;
+.l_btn a, .s_btn :hover {
+    background-color: rgb(255, 255, 255);
+    color: rgb(0, 0, 0);
+    margin: 6px;
+    border-radius: 40px;
+    padding: 7px;
+    padding-left: 9px;
+    padding-right: 9px;
+    transition: background-color 0.3s, color 0.3s;
 }
 
-.s_btn a,
-.l_btn a:hover {
-	background-color: inherit;
-	color: black;
-	margin: 6px;
-	border-radius: 40px;
-	padding: 7px;
-	padding-left: 9px;
-	padding-right: 9px;
-	transition: background-color 0.3s, color 0.3s;
+.s_btn a, .l_btn a:hover {
+    background-color: inherit;
+    color: rgb(255, 255, 255);
+    margin: 6px;
+    border-radius: 40px;
+    padding: 7px;
+    padding-left: 9px;
+    padding-right: 9px;
+    transition: background-color 0.3s, color 0.3s;
 }
 
 a {
-	text-decoration: none;
-	color: rgb(255, 255, 255);
-}
-
-.profile-pic {
-	width: 40px;
-	/* Adjust as necessary */
-	height: 40px;
-	/* Adjust as necessary */
-	border-radius: 50%;
-	/* For a circular image */
-	cursor: pointer;
-	/* Change cursor to pointer on hover */
-	border: 2px solid white;
+    text-decoration: none;
+    color: white;
 }
 
 .separator {
-	border-bottom: 2.5px solid rgb(255, 255, 255);
-	width: 90%;
-	margin: 0 auto;
-	margin-top: 8px;
+    border-bottom: 2.5px solid rgb(255, 255, 255);
+    width: 90%;
+    margin: 0 auto;
+    margin-top: 6px;
 }
 
-/* Chatbox Container */
+.profile-pic {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    cursor: pointer;
+    border: 1px solid rgb(255, 255, 255);
+}
+
 .container {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
 }
 
 .chatbox {
-	width: 80%;
-	background-color: #b0c9d8;
-	border-radius: 10px;
-	padding: 20px;
-	box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
-	/* Background Image Settings */
-	background-image: url('../images/Stethoscope.png');
-	/* Update with the correct path */
-	background-size: 150px;
-	/* Adjust the size to make it smaller */
-	background-repeat: no-repeat;
-	background-position: center;
-	height: 80vh;
+    width: 80%;
+    background-color: #b0c9d8;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    background-image: url('../images/Stethoscope.png');
+    background-size: 150px;
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 80vh;
 }
 
-/* Chat Header */
 .chat-header {
-	display: flex;
-	align-items: center;
-	padding-bottom: 10px;
-	border-bottom: 1px solid #8da5b4;
+    display: flex;
+    align-items: center;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #8da5b4;
 }
 
 .chat-header img {
-	width: 50px;
-	height: 50px;
-	margin-right: 10px;
-	border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    margin-right: 10px;
+    border-radius: 50%;
 }
 
 .user_info span {
-	font-size: 2.2em;
-	font-weight: bold;
+    font-size: 2.2em;
+    font-weight: bold;
 }
 
 .user_info p {
-	font-size: 0.9em;
-	color: #555;
-	margin: 0;
+    font-size: 0.9em;
+    color: #555;
+    margin: 0;
 }
 
-/* Message Area */
 .message-area {
-	height: 75%;
-	overflow-y: auto;
-	margin-top: 10px;
+    height: 75%;
+    overflow-y: auto;
+    margin-top: 10px;
 }
 
 .message-area::-webkit-scrollbar {
-	display: none;
-	/* Hides scrollbar in Chrome, Safari, and Edge */
+    display: none;
 }
 
-/* Chat Footer */
 .chat-footer {
-	display: flex;
-	justify-content: center;
-	width: 100%;
-	padding-top: 10px;
-	border-top: 1px solid #8da5b4;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    padding-top: 10px;
+    border-top: 1px solid #8da5b4;
 }
 
 #chatForm {
-	width: 50%;
-	display: flex;
-	align-content: center;
-	align-items: center;
-	flex-wrap: wrap;
+    width: 50%;
+    display: flex;
+    align-content: center;
+    align-items: center;
+    flex-wrap: wrap;
 }
 
 .chat-footer input[type="text"] {
-	flex: 1;
-	/* Allow the input to take up available space */
-	padding: 10px;
-	border: none;
-	border-radius: 20px;
-	margin-right: 10px;
-	/* Space between input and button */
-	outline: none;
-	box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
-	font-size: 1em;
-	background-color: #e3eff4;
-
+    flex: 1;
+    padding: 10px;
+    border: none;
+    border-radius: 20px;
+    margin-right: 10px;
+    outline: none;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    font-size: 1em;
+    background-color: #e3eff4;
 }
 
 .chat-footer button {
-	padding: 10px 15px;
-	/* Adjust padding for better appearance */
-	border: none;
-	border-radius: 20px;
-	background-color: #333;
-	color: white;
-	cursor: pointer;
-	font-size: 1em;
-	transition: background-color 0.3s;
-	/* Add transition for smooth effect */
+    padding: 10px 15px;
+    border: none;
+    border-radius: 20px;
+    background-color: #333;
+    color: white;
+    cursor: pointer;
+    font-size: 1em;
+    transition: background-color 0.3s;
 }
 
 .chat-footer button:hover {
-	background-color: inherit;
-	/* Change color on hover */
-	color: black;
+    background-color: inherit;
+    color: black;
 }
 
-/* Dropdown Menu for Tabs */
 .dropdown-menu {
-	position: absolute;
-	background: linear-gradient(to right, rgba(38, 51, 61, 0.507), rgba(50, 55, 65, 0.512), rgba(33, 33, 78, 0.527));
-	border-radius: 5px;
-	box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-	padding: 10px;
+    position: absolute;
+    background: linear-gradient(to right, rgba(38, 51, 61, 0.507), rgba(50, 55, 65, 0.512), rgba(33, 33, 78, 0.527));
+    border-radius: 5px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 10px;
 }
 
 .dropdown-menu ul {
-	list-style: none;
-	margin: 0;
-	padding: 0;
+    list-style: none;
+    margin: 0;
+    padding: 0;
 }
 
 .dropdown-menu a {
-	text-decoration: none;
-	color: #333;
-	display: block;
-	padding: 5px 10px;
+    text-decoration: none;
+    color: #333;
+    display: block;
+    padding: 5px 10px;
 }
 
 .dropdown-menu a:hover {
-	color: #0072bc;
-	background-color: #c0d1dc;
-	border-radius: 5px;
+    color: #0072bc;
+    background-color: #c0d1dc;
+    border-radius: 5px;
 }
 
-/* Message Styles */
 .msg-container {
-	display: flex;
-	align-items: center;
-	padding: 5px;
-	border-radius: 5px;
-	margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    padding: 5px;
+    border-radius: 5px;
+    margin-bottom: 10px;
 }
 
 .msg-container.user {
-	justify-content: flex-end;
-	text-align: right;
+    justify-content: flex-end;
+    text-align: right;
 }
 
 .msg-container.bot {
-	justify-content: flex-start;
-	text-align: left;
+    justify-content: flex-start;
+    text-align: left;
 }
 
 .msg-container .message {
-	padding: 8px 15px;
-	border-radius: 20px;
-	background-color: #8da5b4;
-	color: #000000;
+    padding: 8px 15px;
+    border-radius: 20px;
+    background-color: #8da5b4;
+    color: #000000;
 }
 
 .msg-container.user .message {
-	background-color: #0072bc;
+    background-color: #0072bc;
 }
 
 .msg-time {
-	font-size: 0.8em;
-	color: #555;
-	margin: 0 10px;
+    font-size: 0.8em;
+    color: #555;
+    margin: 0 10px;
 }
 
-/* Media Query for Smaller Screens */
 @media (max-width: 400px) {
+    #chatForm {
+        flex-direction: column;
+    }
 
-	/* Adjust width as necessary */
-	.navBar {
-		font-size: 1em
-	}
+    .chat-footer input[type="text"] {
+        margin-right: 0px;
+    }
 
-	.profile-pic {
-		height: 20px;
-		width: 20px;
-	}
+    .chat-footer button {
+        margin-top: 4px;
+    }
+}
 
-	#chatForm {
-		flex-direction: column;
-	}
+@media (max-width: 800px) {
+    .navBar {
+        flex-direction: column;
+        align-items: center;
+        height: 40vh;
+    }
 
-	.chat-footer input[type="text"] {
-		margin-right: 0px;
-	}
+    .nav_links {
+        max-height: 15vh;
+    }
 
-	.chat-footer button {
-		margin-top: 4px;
-	}
+    .nav_links ul {
+        flex-direction: column;
+        align-items: center;
+        margin: initial;
+        width: initial;
+        padding: unset;
+    }
+
+    .joining {
+        border-left: none;
+    }
+
+    .logo {
+        border-right: none;
+    }
 }

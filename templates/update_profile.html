@@ -2,11 +2,17 @@
 <html lang="en">
 
 <head>
+    <!-- Meta for Responsive Design -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Fav Icon -->
     <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/Intelli_Logo.png') }}">
+    <!-- CSS Import -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/summarize.css') }}">
+    <!-- Loader CSS and JS -->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/loader.css') }}">
     <script src="{{ url_for('static', filename='js/loader.js') }}" defer></script>
+    <!-- Fonts Import -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Abel&display=swap" rel="stylesheet">
@@ -21,13 +27,13 @@
             font-family: Arial, sans-serif;
             color: #333;
             margin: 0;
-            overflow: hidden; /* Prevents scrolling */
+            overflow: hidden;
         }
     
         .profile-card {
             width: 90%;
             max-width: 500px;
-            padding: 20px; /* Reduced padding */
+            padding: 20px;
             border-radius: 15px;
             background-color: white;
             box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
@@ -35,14 +41,14 @@
         }
     
         .profile-card h1 {
-            font-size: 2rem; /* Reduced font size */
+            font-size: 2rem;
             font-weight: 700;
             color: #1f3b65;
-            margin-bottom: 10px; /* Adjusted spacing */
+            margin-bottom: 10px;
         }
     
         .profile-icon img {
-            width: 120px; /* Reduced size */
+            width: 120px;
             height: 120px;
             border-radius: 50%;
             object-fit: cover;
@@ -50,24 +56,24 @@
         }
     
         .form-group {
-            margin-bottom: 12px; /* Reduced spacing */
+            margin-bottom: 12px;
             text-align: left;
         }
     
         label {
             font-weight: bold;
             color: #495057;
-            font-size: 0.9rem; /* Slightly smaller label */
+            font-size: 0.9rem;
         }
     
         input, select {
-            width: 100%; /* Full width */
+            width: 100%;
             padding: 8px;
             font-size: 0.9rem;
             border: 1px solid #ced4da;
             border-radius: 5px;
             margin-top: 4px;
-            box-sizing: border-box; /* Ensures padding doesn’t affect total width */
+            box-sizing: border-box;
         }
     
         .form-group input:focus, .form-group select:focus {
@@ -78,7 +84,7 @@
         .button {
             background-color: #2980b9;
             color: white;
-            padding: 8px 16px; /* Reduced padding */
+            padding: 8px 16px;
             font-size: 0.9rem;
             border: none;
             border-radius: 20px;
@@ -123,6 +129,10 @@
 </head>
 
 <body>
+
+    <div id="loader" class="loader">
+        <img src="{{ url_for('static', filename='images/Giffy-Loader.gif') }}" alt="Loading..." class="loader-gif">
+    </div>
 
     <div class="floating-circle circle1"></div>
     <div class="floating-circle circle2"></div>

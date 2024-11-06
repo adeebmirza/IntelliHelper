@@ -6,7 +6,6 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
     margin: 0;
     padding: 0;
 }
@@ -28,8 +27,8 @@ body::-webkit-scrollbar-thumb {
 }
 
 .container {
-    background-color: rgba(255, 255, 255, 0.4); /* Semi-transparent white */
-    backdrop-filter: blur(10px); /* Blur effect */
+    background-color: rgba(255, 255, 255, 0.4);
+    backdrop-filter: blur(10px);
     border-radius: 10px;
     box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
     display: flex;
@@ -41,7 +40,7 @@ body::-webkit-scrollbar-thumb {
 }
 
 .login-section {
-    background-color: #f0f8ff; /* Opaque */
+    background-color: #f0f8ff;
     width: 25%;
     margin-right: 3%;
     border-radius: 10px 0 0 10px;
@@ -49,7 +48,7 @@ body::-webkit-scrollbar-thumb {
 }
 
 .signup-section {
-    background-color: #f0f8ff; /* Opaque */
+    background-color: #f0f8ff;
     border-radius: 0 10px 10px 0;
     padding: 40px;
     width: 75%;
@@ -76,6 +75,26 @@ a:hover {
 
 input[type="text"], input[type="password"] {
     width: 95%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+}
+
+input[type="date" i] {
+    font-style: normal;
+    width: 95%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+}
+
+.input-group select{
+    font-style: normal;
+    width: 99%;
     padding: 10px;
     margin: 10px 0;
     border: 1px solid #ccc;
@@ -188,6 +207,14 @@ input[type="text"], input[type="password"] {
 }
 
 @media screen and (max-width: 480px) {
+    input[type="date" i] {
+        width: 90%;
+    }
+
+    .input-group select {
+        width: 100%;
+    }
+
     .container {
         padding: 10px;
     }

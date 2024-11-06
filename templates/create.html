@@ -1,90 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Meta for Responsive Design -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Fav_Icon -->
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/Intelli_Logo.png') }}">
+    <!-- CSS Import -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/create.css') }}">
+    <!-- Loader CSS and JS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/loader.css') }}">
+    <script src="{{ url_for('static', filename='js/loader.js') }}" defer></script>
     <!-- Fonts Import -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Abel&display=swap" rel="stylesheet">
     <title>Create Note</title>
-    <style>
-        /* Style for the body */
-        body {
-            font-family: 'Abel', sans-serif; /* Font family for better readability */
-            background-color: #f4f4f4; /* Light background color */
-            margin: 0;
-            padding: 20px; /* Add some padding to the body */
-        }
-
-        /* Style for the container */
-        .container {
-            max-width: 1400px; /* Set a max width for the form */
-            margin: 0 auto; /* Center the container */
-            padding: 20px; /* Add padding inside the container */
-            background-color: #fff; /* White background for the form */
-            border-radius: 8px; /* Rounded corners */
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
-        }
-
-        /* Style for the headings */
-        h1 {
-            text-align: center; /* Center the heading */
-            color: #333; /* Dark color for better readability */
-        }
-
-        /* Style for labels */
-        label {
-            font-weight: bold; /* Make labels bold */
-            margin-bottom: 5px; /* Space below labels */
-            display: block; /* Make labels block elements */
-        }
-
-        /* Style for input fields */
-        input[type="text"] {
-            width: 15%; /* Title input width */
-            padding: 10px; /* Add padding */
-            margin-bottom: 15px; /* Space below inputs */
-            border: 1px solid #ddd; /* Light gray border */
-            border-radius: 4px; /* Rounded corners */
-            font-size: 16px; /* Increase font size */
-            display: block; /* Make it block-level to center */
-            margin-left: 0px; /* Centering */
-            margin-right: auto; /* Centering */
-        }
-
-        /* Style for the textarea */
-        textarea {
-            width: 99%; /* Full width for textarea */
-            height: 50vh; /* Fixed height */
-            resize: vertical; /* Allow vertical resizing */
-            padding: 10px; /* Add padding */
-            border: 1px solid #ddd; /* Light gray border */
-            border-radius: 4px; /* Rounded corners */
-            font-size: 16px; /* Increase font size */
-            margin-bottom: 15px; /* Space below textarea */
-        }
-
-        /* Style for the button */
-        button {
-            padding: 10px 15px; /* Padding for the button */
-            border: none; /* Remove border */
-            border-radius: 4px; /* Rounded corners */
-            background-color: #4CAF50; /* Green background */
-            color: white; /* White text */
-            font-size: 16px; /* Increase font size */
-            cursor: pointer; /* Pointer cursor on hover */
-            width: 100%; /* Full width */
-            transition: background-color 0.3s; /* Smooth background color change */
-        }
-
-        /* Button hover effect */
-        button:hover {
-            background-color: #45a049; /* Darker green on hover */
-        }
-    </style>
 </head>
 <body>
+
+    <div id="loader" class="loader">
+        <img src="{{ url_for('static', filename='images/Giffy-Loader.gif') }}" alt="Loading..." class="loader-gif">
+    </div>
+
+    <div class="shape shape1"></div>
+    <div class="shape shape2"></div>
+    <div class="shape shape3"></div>
+    <div class="shape shape4"></div>
+
     <div class="container">
         <h1>Create a New Note</h1>
         <form method="POST">

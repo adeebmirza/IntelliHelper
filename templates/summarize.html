@@ -58,9 +58,13 @@
 
         <div class="joining">
             {% if session.user %}
-            <a href="{{ url_for('profile.profile') }}">
-                <img src="data:image/png;base64,{{ display_data.profile_pic }}" alt="IH" class="profile-pic" />
-            </a>
+                <a href="{{ url_for('profile.profile') }}">
+                    {% if display_data.profile_pic %}
+                        <img src="data:image/png;base64,{{ display_data.profile_pic }}" alt="IH" class="profile-pic" />
+                    {% else %}
+                        <img src="{{ url_for('static', filename='images/dummy_profile_pic.png') }}" alt="IH" class="profile-pic" />
+                    {% endif %}
+                </a>
             {% else %}
             <div class="l_btn"><a href="{{ url_for('auth.login') }}">Login</a></div>
             <div class="s_btn"><a href="{{ url_for('auth.signup') }}">SignUp</a></div>
@@ -176,7 +180,7 @@
 
             // Clear previous summary and show "Summarizing..." text
             summaryDiv.textContent = "Summarizing...";
-            summaryDiv.style.display = "block"; // Show the summary section while loading
+            summaryDiv.style.display = "block";
 
             try {
                 const response = await fetch("/summarize", {

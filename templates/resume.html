@@ -56,10 +56,13 @@
 
         <div class="joining">
             {% if session.user %}
-            <a href="{{ url_for('profile.profile') }}">
-                <img src="data:image/png;base64,{{ display_data.profile_pic }}" alt="IH"
-                    class="profile-pic" />
-            </a>
+                <a href="{{ url_for('profile.profile') }}">
+                    {% if display_data.profile_pic %}
+                        <img src="data:image/png;base64,{{ display_data.profile_pic }}" alt="IH" class="profile-pic" />
+                    {% else %}
+                        <img src="{{ url_for('static', filename='images/dummy_profile_pic.png') }}" alt="IH" class="profile-pic" />
+                    {% endif %}
+                </a>
             {% else %}
             <div class="l_btn"><a href="{{ url_for('auth.login') }}">Login</a></div>
             <div class="s_btn"><a href="{{ url_for('auth.signup') }}">SignUp</a></div>
@@ -73,8 +76,8 @@
         
         <!-- Content Wrapper -->
         <div class="content-wrapper">
-            <p>Resume Checker</p>
-            <h1>Is Your Resume Good Enough??</h1>
+            <p class="cw_p">Resume Checker</p>
+            <h1 class="p-wrapper">Is Your Resume Good Enough</h1>
             <span id="content-wrapper-p">
                 <p>Find out then...</p>
                 <p>A free and fast AI resume checker doing 16 crucial checks to ensure your resume is ready to perform
@@ -94,8 +97,8 @@
             </div>
     
             <label for="job_description">Job Description:</label>
-            <div>
-                <textarea name="job_description" id="job_description" rows="5" required></textarea>
+            <div class="jobs">
+                <textarea name="job_description" id="job_description" placeholder="Enter your job Description..." required></textarea>
             </div>
     
             <button type="submit">Check Resume Score</button>
@@ -136,7 +139,7 @@
         </div>
 
         <div class="content-wrapper_3">
-            <h1>How it Works!</h1>
+            <h1 style="text-align: center;">How it Works!</h1>
             <div class="feature-box_1">
                 <p>
                 <ol>

@@ -1,0 +1,269 @@
+/* Reset and General Styles */
+body {
+    font-family: 'Abel', sans-serif;
+    background: linear-gradient(135deg, #f4f7f6, #d6e6f2, #c9e0f2, #b7d5f2);
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* Floating chaotic shapes */
+.shape {
+    position: absolute;
+    opacity: 0.25;
+    animation: chaos 10s ease-in-out infinite;
+    mix-blend-mode: multiply;
+    z-index: -1;
+}
+
+.shape1 {
+    width: 150px;
+    height: 150px;
+    top: 10%;
+    left: 15%;
+    background: radial-gradient(circle, #ff9a9e, #fad0c4);
+    border-radius: 50%;
+    animation-duration: 14s;
+}
+
+.shape2 {
+    width: 180px;
+    height: 180px;
+    top: 50%;
+    left: 60%;
+    background: radial-gradient(circle, #a1c4fd, #c2e9fb);
+    border-radius: 50%;
+    animation-duration: 12s;
+}
+
+.shape3 {
+    width: 120px;
+    height: 120px;
+    bottom: 20%;
+    right: 20%;
+    background: linear-gradient(135deg, #fbc2eb, #a6c1ee);
+    clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+    animation-duration: 18s;
+}
+
+.shape4 {
+    width: 90px;
+    height: 90px;
+    bottom: 10%;
+    left: 25%;
+    background: radial-gradient(circle, #f6d365, #fda085);
+    border-radius: 50%;
+    animation-duration: 15s;
+}
+
+/* Animation for Chaos */
+@keyframes chaos {
+    0% {
+        transform: translateY(0px) translateX(0px) rotate(0deg);
+    }
+
+    50% {
+        transform: translateY(-30px) translateX(20px) rotate(45deg);
+    }
+
+    100% {
+        transform: translateY(0px) translateX(0px) rotate(0deg);
+    }
+}
+
+/* Jumbotron Container */
+.jumbotron {
+    background: linear-gradient(135deg, #ffffff, #f4f7f6);
+    padding: 2em;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    max-width: 700px;
+    margin: 3em auto;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+    overflow: hidden;
+}
+
+.jumbotron h1 {
+    font-size: 2.5rem;
+    color: #333;
+    margin-bottom: 0.5em;
+    background: linear-gradient(to right, #ff9a9e, #fad0c4);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.jumbotron p {
+    font-size: 1.2rem;
+    color: #555;
+    margin-bottom: 1em;
+    padding: 0 1em;
+}
+
+.jumbotron .cta-button {
+    display: inline-block;
+    padding: 0.75em 2em;
+    font-size: 1rem;
+    background-color: #007bff;
+    color: #fff;
+    border-radius: 25px;
+    transition: background-color 0.3s ease;
+    text-decoration: none;
+}
+
+.jumbotron .cta-button:hover {
+    background-color: #0056b3;
+}
+
+/* Floating circles */
+.floating-circle {
+    position: absolute;
+    border-radius: 50%;
+    opacity: 0.15;
+    background: rgba(100, 150, 220, 0.3);
+    animation: float 10s ease-in-out infinite;
+}
+
+.circle1 {
+    width: 150px;
+    height: 150px;
+    top: 10%;
+    left: 20%;
+    animation-duration: 12s;
+}
+
+.circle2 {
+    width: 200px;
+    height: 200px;
+    bottom: 15%;
+    right: 25%;
+    animation-duration: 15s;
+}
+
+.circle3 {
+    width: 100px;
+    height: 100px;
+    top: 50%;
+    right: 10%;
+    animation-duration: 10s;
+}
+
+.circle4 {
+    width: 120px;
+    height: 120px;
+    bottom: 25%;
+    left: 15%;
+    animation-duration: 18s;
+}
+
+/* Floating Animation */
+@keyframes float {
+    0% {
+        transform: translateY(0px) translateX(0px);
+    }
+
+    50% {
+        transform: translateY(-20px) translateX(10px);
+    }
+
+    100% {
+        transform: translateY(0px) translateX(0px);
+    }
+}
+
+/* Container Styles */
+.container {
+    width: 90%;
+    max-width: 800px;
+    height: auto;
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    align-items: center; /* Center children */
+}
+
+/* Heading Styles */
+h1 {
+    text-align: center;
+    color: #333;
+    font-size: 1.8em;
+}
+
+/* Label Styles */
+label {
+    font-weight: 600;
+    color: #555;
+    margin-bottom: 5px;
+    display: block;
+}
+
+/* Input Field Styles */
+input[type="text"],
+textarea {
+    width: 95%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 1em;
+    color: #333;
+    transition: border-color 0.3s;
+    display: block;
+    margin: 5px auto;
+}
+
+input[type="text"]:focus,
+textarea:focus {
+    border-color: #007bff;
+    outline: none;
+}
+
+/* Textarea Styles */
+textarea {
+    all: unset;
+    width: 95%;
+    padding: 10px;
+    font-size: 1rem;
+    border-radius: 5px;
+    background-color: #fafafa;
+    transition: border 0.3s ease;
+    overflow-wrap: break-word;
+    white-space: pre-wrap;
+    border: 1px solid transparent;
+    height: 42vh;
+    display: block;
+    margin: 0 auto;
+}
+
+form{
+    width: 100%;
+}
+
+/* Button Styles */
+button {
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    background-color: #007bff;
+    color: #fff;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    width: 50%;
+    border: 1px solid #007bff;
+    margin: 0 auto;
+    display: block; 
+}
+
+button:hover {
+    background-color: inherit;
+    color: #007bff;
+    border: 1px solid #007bff;
+}

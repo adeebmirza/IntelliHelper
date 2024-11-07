@@ -14,8 +14,8 @@ argon2 = PasswordHasher()
 load_dotenv()
 
 mongo_url=os.getenv("MONGO_URL")
-#if mongo_url and mongo_url.startswith("MONGO_URL="):
- #   mongo_url = mongo_url.split("=", 1)[1].strip()
+if mongo_url and mongo_url.startswith("MONGO_URL="):
+    mongo_url = mongo_url.split("=", 1)[1].strip()
 
 try:
     client = MongoClient(mongo_url)

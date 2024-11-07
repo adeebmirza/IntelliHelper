@@ -1,20 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <!-- Meta for Responsive Design -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Fav_Icon -->
     <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/Intelli_Logo.png') }}">
-    <!-- CSS Import -->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/todo.css') }}">
-    <!-- Loader CSS and JS -->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/loader.css') }}">
     <script src="{{ url_for('static', filename='js/loader.js') }}" defer></script>
-    <!-- Fonts Import -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Abel&display=swap" rel="stylesheet">
     <title>To-Do List</title>
 </head>
@@ -22,6 +14,14 @@
 <body>
     <div id="loader" class="loader">
         <img src="{{ url_for('static', filename='images/Giffy-Loader.gif') }}" alt="Loading..." class="loader-gif">
+    </div>
+
+    <!-- Flash Message Modal -->
+    <div id="flashModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <p id="flashMessage"></p>
+        </div>
     </div>
 
     <div class="container">
@@ -39,14 +39,6 @@
                     </option>
                     {% endfor %}
                 </select>
-            </div>
-            
-            <div class="grps">
-                {% for group in groups %}
-                <option value="{{ url_for('todo_app.index', group=group) }}" {% if group == selected_group %}selected{% endif %}>
-                    {{ group }}
-                </option>
-                {% endfor %}
             </div>
 
             <div class="task-add">
@@ -77,6 +69,71 @@
             </ul>
         </div>
     </div>
+
+    <!-- JavaScript for Flash Modal -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            let flashMessage = "{{ get_flashed_messages()[0] if get_flashed_messages() else '' }}";
+            if (flashMessage) {
+                let modal = document.getElementById("flashModal");
+                document.getElementById("flashMessage").textContent = flashMessage;
+                
+                // Display the modal
+                modal.style.display = "block";
+                
+                // Close the modal after 3 seconds
+                setTimeout(function() {
+                    modal.style.display = "none";
+                }, 3000);
+            }
+        });
+
+        // Close button functionality for modal
+        document.querySelector(".close").onclick = function() {
+            document.getElementById("flashModal").style.display = "none";
+        };
+    </script>
+
+    
+
+    <style>
+        /* Modal styling */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.4);
+        }
+
+        .modal-content {
+            background-color: #fff;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 400px;
+            text-align: center;
+            border-radius: 8px;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: #000;
+            text-decoration: none;
+        }
+    </style>
 </body>
 
 </html>

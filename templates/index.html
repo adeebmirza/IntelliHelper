@@ -36,6 +36,7 @@
         <div class="nav_links">
             <ul>
                 <li><a href="{{ url_for('about.about') }}">About Us</a></li>
+                
                 <li>
                     <button onclick="toggleMenu()">Tabs</button>
                     <div class="dropdown-menu" style="display: none;">
@@ -48,6 +49,11 @@
                             <li><a href="{{ url_for('notes_app.all_notes') }}">Notes</a></li>
                         </ul>
                     </div>
+                    <li class="nav-item">
+                    <a class="nav-link" data-widget="fullscreen" href="#" role="button">
+                        <i class="fas fa-expand-arrows-alt"></i>
+                    </a>
+                </li>
                 </li>
             </ul>
         </div>
@@ -74,10 +80,11 @@
 
     <div class="jumbotron">
         <div class="j_data">
-            JOIN..IMPORVE..<span id="j_data_highlight">LEARN.</span> 
-            <div id="countdown" style="margin-top: 20px; font-size: 45px; font-weight: bold;"></div>
-            <br><br>
-            Welcome To IntelliHelper!!<br>Get your Solutions<br>Right Now
+            JOIN..IMPROVE..<span id="j_data_highlight">LEARN.</span> 
+            <div id="countdown" style="margin-top: 20px; font-size: 45px; font-weight: bold;">
+                <br><br>
+            </div>
+            Welcome To IntelliHelper ! !<br>Get your Daily Solutions<br>Right Now
         </div>
     </div>
 
@@ -176,7 +183,7 @@
     
             // Update the countdown element
             document.getElementById("countdown").innerHTML =
-                `Complete your goals before the clock strikes the new Dawn! <br> <span class="timer">${days}d ${hours}h ${minutes}m ${seconds}s</span>`;
+                `Race against time and finish strong—complete your goals before the clock strikes the New Year!🎆⏳ <br> <span class="timer">${days}d ${hours}h ${minutes}m ${seconds}s</span>`;
         }
     
         // Update the countdown every second

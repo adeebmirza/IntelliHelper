@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, redirect, url_for, session
+from flask import Blueprint, render_template, request, redirect, url_for, session,flash
 from bson.objectid import ObjectId
 #from src.database import todos_collection
 
@@ -10,6 +10,7 @@ def index():
     from src.database import todos_collection
     user_id = session.get('user', {}).get('_id')
     if not user_id:
+        flash('Please login to view your tasks.', 'info')
         return redirect(url_for('auth.login'))
     
     selected_group = request.args.get('group')  # Get selected group from query parameter

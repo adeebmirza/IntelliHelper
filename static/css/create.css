@@ -178,7 +178,6 @@ body {
 /* Container Styles */
 .container {
     width: 90%;
-    max-width: 800px;
     height: auto;
     background-color: #ffffff;
     padding: 20px;
@@ -237,7 +236,7 @@ textarea {
     overflow-wrap: break-word;
     white-space: pre-wrap;
     border: 1px solid transparent;
-    height: 42vh;
+    height: 45vh;
     display: block;
     margin: 0 auto;
 }

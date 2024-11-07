@@ -19,6 +19,7 @@ if not os.path.exists(UPLOAD_FOLDER):
 def all_notes():
     user_id = session.get('user', {}).get('_id')
     if not user_id:
+        flash('Please login to view your notes.', 'info')
         return redirect(url_for('auth.login'))
     
     # Fetch only the notes for the specific user
@@ -149,7 +150,7 @@ def share_note_link(note_id):
     note = notes_collection.find_one({"note_id": note_id, "user_id": ObjectId(user_id)})
     if note:
         share_token = secrets.token_urlsafe(16)
-        expiration_time = datetime.now() + timedelta(hours=24)
+        expiration_time = datetime.now() + timedelta(minutes=2)
         
         notes_collection.update_one(
             {"note_id": note_id},
@@ -157,7 +158,8 @@ def share_note_link(note_id):
         )
         
         share_link = url_for('notes_app.view_shared_note', note_id=note_id, token=share_token, _external=True)
-        return jsonify({"share_link": share_link}), 200
+        flash(f'Your share link is :  <a href="{share_link}" target="_blank">{share_link}</a>', 'info')
+        return redirect(url_for('notes_app.all_notes'))
     return jsonify({"error": "Note not found"}), 404
 
 @notes.route('/shared/<note_id>/<token>')

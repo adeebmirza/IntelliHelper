@@ -8,11 +8,11 @@
 }
 
 /* Giving the Body background animation */
- body {
+body {
     margin: auto;
     font-family: 'Abel', sans-serif;
     overflow: auto;
-    background: linear-gradient(315deg, rgba(212,234,235,1) 5%, rgba(185,220,221,1) 40%, rgba(130,189,192,1) 70%, rgba(92,144,147,1) 100%);
+    background: linear-gradient(315deg, rgba(212, 234, 235, 1) 5%, rgba(185, 220, 221, 1) 40%, rgba(130, 189, 192, 1) 70%, rgba(92, 144, 147, 1) 100%);
     animation: gradient 15s ease infinite;
     background-size: 400% 400%;
     background-attachment: fixed;
@@ -40,9 +40,11 @@
     0% {
         background-position: 0% 0%;
     }
+
     50% {
         background-position: 100% 100%;
     }
+
     100% {
         background-position: 0% 0%;
     }
@@ -97,7 +99,7 @@
 }
 
 /* Navbar Design */
-.navBar{
+.navBar {
     display: flex;
     justify-content: space-around;
     align-items: center;
@@ -105,22 +107,22 @@
     margin-top: 1%;
 }
 
-.navBar *{
+.navBar * {
     font-weight: bold;
 }
 
-.logo{
+.logo {
     border-right: 2px solid black;
     cursor: default;
     min-width: 10%;
     max-height: 7vh;
 }
 
-.nav_links{
+.nav_links {
     min-width: 20%;
 }
 
-.nav_links ul{
+.nav_links ul {
     display: flex;
     list-style: none;
     justify-content: space-around;
@@ -133,14 +135,15 @@
     padding-right: 7px;
 }
 
-.nav_links a:hover , .nav_links button:hover{
-    border-bottom : 2px solid black;
+.nav_links a:hover,
+.nav_links button:hover {
+    border-bottom: 2px solid black;
 }
 
-.nav_links button{
+.nav_links button {
     all: unset;
     cursor: pointer;
-    border-bottom : 2px solid transparent;
+    border-bottom: 2px solid transparent;
 }
 
 .dropdown-menu {
@@ -159,12 +162,12 @@
     display: flex;
     list-style-type: none;
     padding: 0;
-    margin: 0; 
+    margin: 0;
     flex-direction: column;
 }
 
 .dropdown-menu li {
-    margin: 0; 
+    margin: 0;
 }
 
 .dropdown-menu li a {
@@ -181,7 +184,7 @@
 }
 
 
-.joining{
+.joining {
     display: flex;
     justify-content: space-around;
     border-left: 2px solid black;
@@ -189,7 +192,8 @@
     max-height: 7vh;
 }
 
-.l_btn a, .s_btn :hover{
+.l_btn a,
+.s_btn :hover {
     background-color: black;
     color: white;
     margin: 6px;
@@ -200,7 +204,8 @@
     transition: background-color 0.3s, color 0.3s;
 }
 
-.s_btn a, .l_btn a:hover{
+.s_btn a,
+.l_btn a:hover {
     background-color: inherit;
     color: black;
     margin: 6px;
@@ -211,7 +216,7 @@
     transition: background-color 0.3s, color 0.3s;
 }
 
-a{
+a {
     text-decoration: none;
     color: black;
 }
@@ -224,7 +229,7 @@ a{
     border: 1px solid black;
 }
 
-.separator{
+.separator {
     border-bottom: 2.5px solid black;
     width: 90%;
     margin: 0 auto;
@@ -232,7 +237,7 @@ a{
 }
 
 /* Jumbotron Design */
-.jumbotron{
+.jumbotron {
     display: flex;
     justify-content: center;
     cursor: default;
@@ -260,13 +265,13 @@ a{
 }
 
 /* Health_bot design */
-.health_bot{
+.health_bot {
     display: flex;
     margin-top: 2%;
     justify-content: center;
 }
 
-.health_bot input{
+.health_bot input {
     all: unset;
     background: white;
     font-size: 1.5rem;
@@ -282,15 +287,18 @@ a{
         transform: scale(0.5);
         opacity: 0;
     }
+
     60% {
         transform: scale(1.05);
         opacity: 1;
     }
+
     100% {
         transform: scale(1);
         opacity: 1;
     }
 }
+
 .health_bot_tab {
     display: none;
     position: fixed;
@@ -427,7 +435,7 @@ a{
     background-color: #2980b9;
 }
 
-#chatForm{
+#chatForm {
     width: 90%;
     display: flex;
     justify-content: center;
@@ -440,6 +448,7 @@ a{
         transform: translateX(50px);
         opacity: 0;
     }
+
     100% {
         transform: translateX(0);
         opacity: 1;
@@ -452,26 +461,29 @@ a{
 
 /* Bottom navbar */
 @keyframes bounce {
-    0%, 100% {
+
+    0%,
+    100% {
         transform: scale(1) translateY(0);
     }
+
     50% {
         transform: scale(1.1) translateY(-10px);
     }
 }
 
 .bottom_links {
-    margin-top: 44px;
+    position: fixed;
     bottom: 0;
-    height: 7%;
-    background-color: rgba(0, 0, 0, 0.7);
+    left: 0;
     width: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
     display: flex;
     align-items: center;
     justify-content: center;
     padding: 10px 0;
     border-radius: 25px 25px 0px 0px;
-    /* z-index: 0; */
+    z-index: 1000; /* Ensures it stays on top of other elements */
 }
 
 .bottom_links ul {
@@ -527,22 +539,6 @@ a{
     pointer-events: none;
 }
 
-/* Adjust triangle for above tooltip */
-.bottom_links ul li a::before {
-    content: "";
-    position: absolute;
-    bottom: 45px;
-    left: 50%;
-    transform: translateX(-50%);
-    border-width: 6px;
-    border-style: solid;
-    border-color: transparent transparent #679da0 transparent;
-    opacity: 0;
-    transition: opacity 0.3s;
-    pointer-events: none;
-}
-
-/* Show tooltip and arrow on hover */
 .bottom_links ul li a:hover::after,
 .bottom_links ul li a:hover::before {
     opacity: 1;
@@ -550,16 +546,16 @@ a{
 }
 
 @media (max-width: 768px) {
-body{
-    max-width: max-content;
-}
+    body {
+        max-width: max-content;
+    }
 
     .navBar {
         flex-direction: column;
         align-items: flex-start;
         padding: 1rem;
     }
-    
+
     .nav_links {
         width: 100%;
         text-align: center;
@@ -578,22 +574,28 @@ body{
         justify-content: center;
     }
 
-    .logo, .nav_links, .joining {
+    .logo,
+    .nav_links,
+    .joining {
         width: 100%;
         text-align: center;
         margin: 5px 0;
     }
 
-    .nav_links li{
+    .nav_links li {
         width: 50%;
     }
 
-    .joining{
+    .joining {
         border-left: none;
     }
 
-    .logo{
+    .logo {
         border-right: none;
+    }
+
+    .bottom_links {
+        bottom: unset;
     }
 }
 
@@ -627,6 +629,7 @@ body{
 
     .bottom_links {
         padding: 5px 0;
+        bottom: 0;
     }
 }
 
@@ -657,14 +660,15 @@ body{
     }
 }
 
-.timer{
-    font-weight: bold;
-    font-size: 40px; 
+.timer {
+    font-weight: 900;
+    font-size: 80px;
     color: #000000;
 }
 
 /* Responsive Layout Adjustments */
 @media (max-width: 768px) {
+
     /* Navbar Responsive */
     .navBar {
         flex-direction: column;
@@ -677,7 +681,9 @@ body{
         align-items: center;
     }
 
-    .joining, .logo, .nav_links {
+    .joining,
+    .logo,
+    .nav_links {
         width: 100%;
         text-align: center;
         margin: 5px 0;
@@ -693,6 +699,7 @@ body{
 }
 
 @media (max-width: 600px) {
+
     /* Jumbotron Responsive */
     .j_data {
         font-size: 1.5rem;
@@ -701,7 +708,8 @@ body{
     }
 
     /* Health Bot Input and Chat Area */
-    .health_bot input, .health_bot_tab .hbt_text input {
+    .health_bot input,
+    .health_bot_tab .hbt_text input {
         font-size: 1.2rem;
         width: 80%;
         padding: 8px;
@@ -725,6 +733,7 @@ body{
 }
 
 @media (max-width: 480px) {
+
     /* Further Navbar Adjustments */
     .nav_links ul {
         font-size: 1.1rem;
@@ -750,4 +759,3 @@ body{
         font-size: 1rem;
     }
 }
-

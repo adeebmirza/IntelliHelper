@@ -1,162 +1,229 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- Meta for Responsive Design -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Fav_Icon -->
     <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/Intelli_Logo.png') }}">
-    <!-- CSS Import -->
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/signup.css') }}">
-    <!-- Loader CSS and JS -->
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/loader.css') }}">
-    <script src="{{ url_for('static', filename='js/loader.js') }}" defer></script>
-    <!-- Fonts Import -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Abel&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Abel:wght@400&display=swap" rel="stylesheet">
     <title>Signup - IntelliHelper</title>
+    <style>
+        /* Reset and Body Styling */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Abel', sans-serif;
+            background-image: url('../images/Background_Design.png');
+            background-repeat: no-repeat;
+            background-size: cover;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        /* Container Styling with Glassmorphism Effect */
+        .container {
+            max-width: 750px;
+            width: 90%;
+            background-color: rgba(255, 255, 255, 0.4);
+            backdrop-filter: blur(10px);
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+
+        h2 {
+            color: #333;
+            font-size: 26px;
+            margin-bottom: 25px;
+            font-weight: 500;
+        }
+
+        /* Form Styling */
+        form {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-gap: 20px;
+        }
+
+        .input-group {
+            text-align: left;
+        }
+
+        label {
+            display: block;
+            color: #555;
+            margin-bottom: 5px;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+            background: #f9f9f9;
+            transition: border-color 0.3s ease;
+        }
+
+        input:focus, select:focus {
+            border-color: #337ab7;
+            outline: none;
+        }
+
+        .full-width {
+            grid-column: span 2;
+        }
+
+        /* Submit Button */
+        .submit-btn {
+            grid-column: span 2;
+            margin-top: 20px;
+        }
+
+        button {
+            padding: 14px 0;
+            width: 100%;
+            font-size: 16px;
+            background: #337ab7;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        #passwordError {
+            grid-column: span 2;
+            color: #ff4d4d;
+            font-size: 13px;
+            text-align: center;
+            display: none;
+        }
+
+        /* Custom Scrollbar */
+        body::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        body::-webkit-scrollbar-track {
+            background: #f1f8f7;
+            border-radius: 8px;
+        }
+
+        body::-webkit-scrollbar-thumb {
+            background-color: #337ab7;
+            border-radius: 8px;
+            border: 2px solid #f1f8f7;
+        }
+
+        /* Responsive Design */
+        @media screen and (max-width: 768px) {
+            .container {
+                padding: 20px;
+                max-width: 90%;
+            }
+
+            h2 {
+                font-size: 1.4rem;
+            }
+
+            button {
+                font-size: 14px;
+            }
+        }
+
+        @media screen and (max-width: 480px) {
+            input, select {
+                font-size: 14px;
+            }
+
+            h2 {
+                font-size: 1.2rem;
+            }
+
+            .container {
+                padding: 15px;
+            }
+        }
+    </style>
 </head>
 <body>
     <div class="container">
-        {% with messages = get_flashed_messages(with_categories=true) %}
-            {% if messages %}
-                {% for category, message in messages %}
-                    <script>
-                        alert("{{ message }}");
-                    </script>
-                {% endfor %}
-            {% endif %}
-        {% endwith %}
+        <h2>Signup for IntelliHelper</h2>
+        <form id="signupForm" method="POST">
+            {{ form.hidden_tag() }}
 
-        <div id="loader" class="loader">
-            <img src="{{ url_for('static', filename='images/Giffy-Loader.gif') }}" alt="Loading..." class="loader-gif">
-        </div>
-        
-        <div class="login-section">
-            <h2>Already a member?</h2>
-            <p>You've got the smarts! <br><a href="{{ url_for('auth.login') }}">Log in here</a> to access your account and continue your journey.</p>
-        </div>
+            <!-- Name and Username -->
+            <div class="input-group">
+                <label>{{ form.name.label }}</label>
+                {{ form.name(autocomplete="off", placeholder="Full Name") }}
+            </div>
+            <div class="input-group">
+                <label>{{ form.username.label }}</label>
+                {{ form.username(autocomplete="off", placeholder="Username") }}
+            </div>
 
-        <div class="signup-section">
-            <h2>Sign Up</h2>
-            
-            <form id="signupForm" method="POST">
-                {{ form.hidden_tag() }}
+            <!-- Email (Full Width) -->
+            <div class="input-group full-width">
+                <label>{{ form.email.label }}</label>
+                {{ form.email(placeholder="Email") }}
+            </div>
 
-                <div class="input-group">
-                    {{ form.name.label }}
-                    {{ form.name(autocomplete="off", oninvalid="this.setCustomValidity('Please enter your name')", oninput="setCustomValidity('')") }}
-                </div>
+            <!-- DOB and Gender -->
+            <div class="input-group">
+                <label>{{ form.dob.label }}</label>
+                {{ form.dob(type="date") }}
+            </div>
+            <div class="input-group">
+                <label>{{ form.gender.label }}</label>
+                {{ form.gender() }}
+            </div>
 
-                <div class="input-group">
-                    {{ form.username.label }}
-                    {{ form.username(autocomplete="off", oninvalid="this.setCustomValidity('Please enter a username')", oninput="setCustomValidity('')") }}
-                </div>
+            <!-- Password and Confirm Password -->
+            <div class="input-group">
+                <label>{{ form.password.label }}</label>
+                {{ form.password(placeholder="Password") }}
+            </div>
+            <div class="input-group">
+                <label>{{ form.confirm_password.label }}</label>
+                {{ form.confirm_password(placeholder="Confirm Password") }}
+                <div id="passwordError">Passwords do not match!</div>
+            </div>
 
-                <div class="input-group">
-                    {{ form.email.label }}
-                    {{ form.email(oninvalid="this.setCustomValidity('Please enter a valid email')", oninput="setCustomValidity('')") }}
-                </div>
-                <div class="input-group">
-                    {{ form.dob.label }}
-                    {{ form.dob(type="date", oninvalid="this.setCustomValidity('Please enter a valid date')", oninput="setCustomValidity('')") }}
-                </div>
-                
-                <div class="input-group">
-                    {{ form.gender.label }}
-                    {{ form.gender(class="form-control") }}
-                </div>
-                
-                
-                <div class="input-group password-container">
-                    {{ form.password.label }}
-                    {{ form.password(oninvalid="this.setCustomValidity('Please enter a password')", oninput="setCustomValidity('')") }}
-                    <span class="eye-icon" id="eyeIcon">
-                        <!-- Default closed eye icon -->
-                        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#337ab7">
-                            <path d="M480-320q75 0 127.5-52.5T660-500q0-75-52.5-127.5T480-680q-75 0-127.5 52.5T300-500q0 75 52.5 127.5T480-320Zm0-72q-45 0-76.5-31.5T372-500q0-45 31.5-76.5T480-608q45 0 76.5 31.5T588-500q0 45-31.5 76.5T480-392Zm0 192q-146 0-266-81.5T40-500q54-137 174-218.5T480-800q146 0 266 81.5T920-500q-54 137-174 218.5T480-200Z"/>
-                        </svg>
-                    </span>
-                </div>
-                
-                <div class="input-group">
-                    {{ form.confirm_password.label }}
-                    {{ form.confirm_password(oninvalid="this.setCustomValidity('Please confirm your password')", oninput="setCustomValidity('')") }}
-                    <div id="passwordError" style="color: red; display: none;">Passwords do not match!</div>
-                </div>
-
-                <div class="signup-btn">
-                    {{ form.submit() }}
-                </div>
-            </form>
-        </div>
+            <!-- Submit Button -->
+            <div class="submit-btn">
+                {{ form.submit(class="submit-btn") }}
+            </div>
+        </form>
     </div>
 
-    <!-- JavaScript to toggle password visibility and validate password match -->
     <script>
-        document.addEventListener("DOMContentLoaded", function() {
+        document.getElementById("signupForm").addEventListener("submit", function(event) {
             const passwordInput = document.querySelector('input[name="password"]');
             const confirmPasswordInput = document.querySelector('input[name="confirm_password"]');
-            const eyeIcon = document.getElementById('eyeIcon');
-            const form = document.getElementById('signupForm');
             const passwordError = document.getElementById('passwordError');
 
-            // Show the eye icon when the password input is focused
-            passwordInput.addEventListener('focus', function() {
-                eyeIcon.style.display = 'block';
-            });
-
-            // Hide the eye icon only if the password field is empty and loses focus
-            passwordInput.addEventListener('blur', function() {
-                if (passwordInput.value.length === 0) {
-                    eyeIcon.style.display = 'none';
-                }
-            });
-
-            // Update the visibility of the icon based on the input field content
-            passwordInput.addEventListener('input', function() {
-                if (passwordInput.value.length > 0) {
-                    eyeIcon.style.display = 'block';
-                } else {
-                    eyeIcon.style.display = 'none';
-                }
-            });
-
-            eyeIcon.addEventListener('click', togglePassword);
-
-            // Password matching validation on form submission
-            form.addEventListener('submit', function(event) {
-                if (passwordInput.value !== confirmPasswordInput.value) {
-                    event.preventDefault();
-                    passwordError.style.display = 'block';
-                } else {
-                    passwordError.style.display = 'none';
-                }
-            });
-        });
-
-        function togglePassword() {
-            const passwordInput = document.querySelector('input[name="password"]');
-            const eyeIcon = document.getElementById('eyeIcon');
-
-            const eyeOpenSvg = `
-                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#337ab7">
-                    <path d="M644-428l-58-58q9-47-27-88t-93-32l-58-58q17-8 34.5-12t37.5-4q75 0 127.5 52.5T660-500q0 20-4 37.5T644-428Zm128 126l-58-56q38-29 67.5-63.5T832-500q-50-101-144.5-160.5T480-720q-29 0-57 4t-55 12l-62-62q41-17 84-25.5t90-8.5q151 0 269 83.5T920-500q-23 59-60.5 109.5T772-302Zm20 246L624-222q-35 11-70.5 16.5T480-200q-151 0-269-83.5T40-500q21-53 53-98.5t73-81.5L56-792l56-56 736 736-56 56ZM222-624q-29 26-53 57t-53 57Zm-31 23Zm0-248Zm0 75Z"/>
-                </svg>`;
-            const eyeClosedSvg = `
-                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#337ab7">
-                    <path d="M480-320q75 0 127.5-52.5T660-500q0-75-52.5-127.5T480-680q-75 0-127.5 52.5T300-500q0 75 52.5 127.5T480-320Zm0-72q-45 0-76.5-31.5T372-500q0-45 31.5-76.5T480-608q45 0 76.5 31.5T588-500q0 45-31.5 76.5T480-392Zm0 192q-146 0-266-81.5T40-500q54-137 174-218.5T480-800q146 0 266 81.5T920-500q-54 137-174 218.5T480-200Z"/>
-                </svg>`;
-
-            if (passwordInput.type === "password") {
-                passwordInput.type = "text";
-                eyeIcon.innerHTML = eyeOpenSvg;
+            if (passwordInput.value !== confirmPasswordInput.value) {
+                event.preventDefault();
+                passwordError.style.display = 'block';
             } else {
-                passwordInput.type = "password";
-                eyeIcon.innerHTML = eyeClosedSvg;
+                passwordError.style.display = 'none';
             }
-        }
+        });
     </script>
 </body>
 </html>

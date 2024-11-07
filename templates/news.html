@@ -29,7 +29,7 @@
     </div>
 
     <div class="navbar">
-        <a href="/">Discover</a>
+        <a href="{{ url_for('news.index') }}">Discover</a>
         <a href="/category/news">News</a>
         <a href="/category/sports">Sports</a>
         <a href="/category/money">Money</a>
@@ -39,7 +39,7 @@
         <a href="{{ url_for('about.Home') }}">Home</a>
     </div>
     <h1>IntelliHelper News Search</h1>
-    <form method="GET" action="/">
+    <form method="GET" action="{{ url_for('news.index') }}">
         <input type="text" name="query" placeholder="Search for news..." required autocomplete="off">
         <button type="submit">Search</button>
     </form>

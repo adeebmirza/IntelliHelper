@@ -150,7 +150,7 @@ def share_note_link(note_id):
     note = notes_collection.find_one({"note_id": note_id, "user_id": ObjectId(user_id)})
     if note:
         share_token = secrets.token_urlsafe(16)
-        expiration_time = datetime.now() + timedelta(minutes=2)
+        expiration_time = datetime.now() + timedelta(hours=24)
         
         notes_collection.update_one(
             {"note_id": note_id},

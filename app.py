@@ -35,4 +35,5 @@ app.register_blueprint(notes)
 app.register_blueprint(about_bp)
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, host='0.0.0.0', port=5000)
+

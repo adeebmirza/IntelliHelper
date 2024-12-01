@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, request, redirect, url_for,session
 from flask import jsonify
-from src.News_Summarizer.process import summarizeTextP
+from src.News_Summarizer.process import summarizeTextP,scrape_article
 from src.database import get_user_by_id
 from src.News_Summarizer.model_load import prediction_model
 text_summarzize = Blueprint('text', __name__)
@@ -26,12 +26,26 @@ def index():
 @text_summarzize.route('/summarize', methods=['POST'])
 def summarize():
     data = request.get_json()
+
+    # Check for both options
+    url = data.get("url", "")
     text = data.get("text", "")
-    
-    if not text:
-        return jsonify({"error": "No text provided"}), 400
-    
-    # Use prediction_model as the model argument
-    summary = summarizeTextP(text, prediction_model)
+
+    if not url and not text:
+        return jsonify({"error": "No URL or text provided"}), 400
+
+    # If URL is provided, scrape the article
+    if url:
+        article_text = scrape_article(url)
+        if not article_text:
+            return jsonify({"error": "Failed to scrape article"}), 500
+        input_text = article_text
+    else:
+        # Use the raw text provided
+        input_text = text
+    print(input_text)
+    # Summarize the input text
+    summary = summarizeTextP(input_text, prediction_model) 
+    print(summary) # Replace `None` with your actual model
     return jsonify({"summary": summary})
 

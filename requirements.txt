@@ -30,3 +30,5 @@ pinecone-client==5.0.1
 pinecone[grpc]
 boto3==1.35.50
 langchain-huggingface==0.1.1
+gunicorn==23.0.0
+beautifulsoup4==4.12.3

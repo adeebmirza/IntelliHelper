@@ -1,7 +1,7 @@
 import requests
 from dotenv import load_dotenv
 import os
-load_dotenv()
+load_dotenv(override=True)
 
 BING_API_KEY = os.getenv("BING_API_KEY")
 

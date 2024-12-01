@@ -9,9 +9,7 @@
     <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/Intelli_Logo.png') }}">
     <!-- CSS Import -->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/summarize.css') }}">
-    <!-- Loader CSS and JS -->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/loader.css') }}">
-    <script src="{{ url_for('static', filename='js/loader.js') }}" defer></script>
     <!-- Fonts Import -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -44,8 +42,7 @@
                     <button onclick="toggleMenu()">Tabs</button>
                     <div class="dropdown-menu" style="display: none;">
                         <ul>
-                            <li><a style="border-radius: 3% 0 0 3%;" href="{{ url_for('medical.index') }}"
-                                    title="Health Bot">Health Bot</a></li>
+                            <li><a href="{{ url_for('medical.index') }}" title="Health Bot">Health Bot</a></li>
                             <li><a href="{{ url_for('ats.index') }}">Resume Checker</a></li>
                             <li><a href="{{ url_for('todo_app.index') }}">To-Do List</a></li>
                             <li><a href="{{ url_for('news.index') }}">News</a></li>
@@ -55,45 +52,38 @@
                 </li>
             </ul>
         </div>
-
-        <div class="joining">
-            {% if session.user %}
-                <a href="{{ url_for('profile.profile') }}">
-                    {% if display_data.profile_pic %}
-                        <img src="data:image/png;base64,{{ display_data.profile_pic }}" alt="IH" class="profile-pic" />
-                    {% else %}
-                        <img src="{{ url_for('static', filename='images/dummy_profile_pic.png') }}" alt="IH" class="profile-pic" />
-                    {% endif %}
-                </a>
-            {% else %}
-            <div class="l_btn"><a href="{{ url_for('auth.login') }}">Login</a></div>
-            <div class="s_btn"><a href="{{ url_for('auth.signup') }}">SignUp</a></div>
-            {% endif %}
-        </div>
-
     </div>
 
     <div class="separator"></div>
 
-
     <!-- Main Container -->
     <div class="container">
         <h1>News Summarizer</h1>
-        <p>Our AI-powered tool simplifies lengthy news articles, making it easier to understand essential information
-            quickly.</p>
+        <p>Our AI-powered tool simplifies lengthy news articles, making it easier to understand essential information quickly.</p>
 
         <!-- Input Section -->
-        <textarea id="inputText" placeholder="Enter text to summarize..."></textarea>
-        <button onclick="summarizeText()">Summarize</button>
+        <div class="input-section">
+            <form action="javascript:void(0)">
+                <label for="inputURL">Enter article URL:</label>
+                <input type="text" id="inputURL" name="url" placeholder="Enter article URL..." />
+
+                <label for="inputText">Or enter text to summarize:</label>
+                <textarea id="inputText" name="text" placeholder="Or enter text to summarize..."></textarea>
+
+                <button type="button" onclick="summarizeText()">Summarize</button>
+            </form>
+        </div>
 
         <!-- Summary Output -->
-        <div id="summary"></div>
+        <div id="summary">
+            <!-- The summary will be displayed here after form submission -->
+        </div>
 
         <!-- Usage Guide Section -->
         <section class="usage-guide">
             <h2>How to Use the News Summarizer</h2>
             <ol>
-                <li>Paste the news article or text you want to summarize into the textbox above.</li>
+                <li>Enter the URL of a news article in the URL field above, or paste the text directly into the textbox.</li>
                 <li>Click on the "Summarize" button.</li>
                 <li>Wait for a few seconds, and the summary will appear below.</li>
             </ol>
@@ -109,10 +99,9 @@
                 <li>Privacy-focused: no text data is stored.</li>
             </ul>
         </section>
-
     </div>
 
-    <!-- FAQ Section -->
+    <!-- Footer Section -->
     <div class="footer">
         <h1>Frequently Asked Questions</h1>
         <div class="footer-body">
@@ -125,87 +114,75 @@
         </div>
     </div>
 
-    <!-- JavaScript -->
-    <script>
-        function toggleMenu() {
-            const dropdownMenu = document.querySelector('.dropdown-menu');
-            // Toggle display of the dropdown menu
-            if (dropdownMenu.style.display === 'none' || dropdownMenu.style.display === '') {
-                dropdownMenu.style.display = 'block';
+   <!-- JavaScript -->
+   <script>
+    // Function to toggle the visibility of the dropdown menu
+    function toggleMenu() {
+        const dropdownMenu = document.querySelector('.dropdown-menu');
+        // Toggle display of the dropdown menu
+        if (dropdownMenu.style.display === 'none' || dropdownMenu.style.display === '') {
+            dropdownMenu.style.display = 'block';
+        } else {
+            dropdownMenu.style.display = 'none';
+        }
+    }
+
+    // Close the dropdown if the user clicks outside of the dropdown or the toggle button
+    document.addEventListener('click', function (event) {
+        const dropdownMenu = document.querySelector('.dropdown-menu');
+        const toggleButton = document.querySelector('button[onclick="toggleMenu()"]');
+
+        // Check if the click is outside the dropdown and the button
+        if (!dropdownMenu.contains(event.target) && !toggleButton.contains(event.target)) {
+            dropdownMenu.style.display = 'none';
+        }
+    });
+
+    // Function to handle summarization of text or URL
+    async function summarizeText() {
+        const inputText = document.getElementById("inputText").value.trim(); // Get input text
+        const inputURL = document.getElementById("inputURL").value.trim();  // Get input URL
+        const summaryDiv = document.getElementById("summary");
+
+        // Clear previous summary and show "Summarizing..." text
+        summaryDiv.textContent = "Summarizing...";
+        summaryDiv.style.display = "block";  // Show the summary container
+
+        // Check if there is no input text or URL
+        if (!inputText && !inputURL) {
+            summaryDiv.textContent = "Please enter some text or a URL to summarize.";
+            return;
+        }
+
+        try {
+            // Prepare the data to send (either URL or text or both)
+            const data = inputURL ? { url: inputURL } : { text: inputText };
+
+            // Send the URL or text to the server for summarization
+            const response = await fetch("/summarize", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(data)  // Send data (either URL or text)
+            });
+
+            if (response.ok) {
+                const data = await response.json();
+                summaryDiv.textContent = data.summary;
             } else {
-                dropdownMenu.style.display = 'none';
+                summaryDiv.textContent = "Error: Unable to summarize the text or URL.";
             }
+        } catch (error) {
+            summaryDiv.textContent = "Error: " + error.message;
         }
 
-        document.addEventListener('click', function (event) {
-            const dropdownMenu = document.querySelector('.dropdown-menu');
-            const toggleButton = document.querySelector('button[onclick="toggleMenu()"]');
+        // Only show the summary if it has content
+        summaryDiv.style.display = summaryDiv.textContent ? "block" : "none";
+    }
+</script>
 
-            // Check if the click is outside the dropdown and the button
-            if (!dropdownMenu.contains(event.target) && !toggleButton.contains(event.target)) {
-                dropdownMenu.style.display = 'none';
-            }
-        });
 
-        async function summarizeText() {
-            const inputText = document.getElementById("inputText").value;
-            const summaryDiv = document.getElementById("summary");
-
-            // Clear previous summary
-            summaryDiv.textContent = "Summarizing...";
-
-            try {
-                const response = await fetch("/summarize", {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json"
-                    },
-                    body: JSON.stringify({ text: inputText })
-                });
-
-                if (response.ok) {
-                    const data = await response.json();
-                    summaryDiv.textContent = data.summary;
-                } else {
-                    summaryDiv.textContent = "Error: Unable to summarize the text.";
-                }
-            } catch (error) {
-                summaryDiv.textContent = "Error: " + error.message;
-            }
-        }
-
-        async function summarizeText() {
-            const inputText = document.getElementById("inputText").value;
-            const summaryDiv = document.getElementById("summary");
-
-            // Clear previous summary and show "Summarizing..." text
-            summaryDiv.textContent = "Summarizing...";
-            summaryDiv.style.display = "block";
-
-            try {
-                const response = await fetch("/summarize", {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json"
-                    },
-                    body: JSON.stringify({ text: inputText })
-                });
-
-                if (response.ok) {
-                    const data = await response.json();
-                    summaryDiv.textContent = data.summary;
-                } else {
-                    summaryDiv.textContent = "Error: Unable to summarize the text.";
-                }
-            } catch (error) {
-                summaryDiv.textContent = "Error: " + error.message;
-            }
-
-            // Only show the summary if it has content
-            summaryDiv.style.display = summaryDiv.textContent ? "block" : "none";
-        }
-
-    </script>
 </body>
 
 </html>

@@ -1,5 +1,7 @@
 from src.News_Summarizer.model_load import tokenizer
 import re
+import requests
+from bs4 import BeautifulSoup
 
 def summarizeTextP(text, model):
     whitespace_handler = lambda k: re.sub(r'\s+', ' ', re.sub(r'\n+', ' ', k.strip()))
@@ -26,3 +28,17 @@ def summarizeTextP(text, model):
         for gen_id in generated_ids
     ]
     return "".join(preds)
+
+
+
+
+def scrape_article(url):
+    response = requests.get(url)
+    if response.status_code == 200:
+        soup = BeautifulSoup(response.content, 'html.parser')
+
+        # This can vary depending on the website structure
+        article_text = ' '.join([p.text for p in soup.find_all('p')])
+        return article_text
+    else:
+        return "Could not scrape article, Please use below feature to summarize text"
